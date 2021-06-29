@@ -36,51 +36,51 @@ Sub Object 1: Steering Wheel
     Name 4 things you'll find on the:    Steering Wheel
         1) paddle shifters
         2) 'cruise control' controls
-        3) 
-        4) 
+        3) horn
+        4) volume controls
     Name 2 things you can do with the:   Steering Wheel
         1) adjust cruise control settings.
-        2)
+        2) honk the horn
         
 Sub Object 2: Instrument Cluster
     Name 4 things you'll find on the:   Instrument Cluster
-        1)
-        2)
-        3)
-        4)
+        1) speedometer
+        2) fuel gauge
+        3) tachometer
+        4) odometer
     Name 3 things you can do with the:   Instrument Cluster
-        1)
-        2)
-        3)
+        1) check amount of fuel remaining
+        2) check current speed
+        3) check total distance traveled
     
 Sub Object 3: Environment Controls
     Name 3 things you'll find on the:    Environment Controls
-        1)
-        2)
-        3)
+        1) drivers side temperature control
+        2) AC on/off toggle
+        3) fan speed control
     Name 3 things you can do with the:   Environment Controls
-        1)
-        2)
-        3)
+        1) adjust drivers side temperature
+        2) turn AC on/off
+        3) adjust fan speed
 
 Sub Object 4: Infotainment System
     Name 3 things you'll find on the:    Infotainment System
-        1)
-        2)
-        3)
+        1) radio station display list
+        2) digital clock
+        3) interior temperature display
     Name 3 things you can do with the:   Infotainment System
-        1)
-        2)
-        3)
+        1) change radio station
+        2) check current time
+        3) check current interior temperature
 
 Sub Object 5: Seat 
     Name 3 things you'll find on the:    Seat
-        1)
-        2)
-        3)
+        1) seat angle controls
+        2) seat depth controls
+        3) seatbelt
     Name 2 things you can do with the:   Seat
-        1)
-        2)
+        1) buckle seatbelt
+        2) adjust seat depth
 */
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
