@@ -54,21 +54,6 @@ Part1 will be broken up into 5 separate steps
     Move the Thing 10 pseudo-code to after your Thing1-4 in the project.
 */
 
-/*
-Thing 10)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-
 
 
 /*
@@ -125,6 +110,20 @@ Thing 4) Steam Locomotive
     1) detach from currently coupled train car
     2) add more coal to the furnace
     3) slam on the brakes
+ */
+
+/*
+Thing 10) Laptop Computer
+5 properties:
+    1) Screen
+    2) Keyboard
+    3) Hard Drive
+    4) RAM
+    5) Operating System
+3 things it can do:
+    1) open an application
+    2) search for wifi networks
+    3) configure preferences
  */
 
 
