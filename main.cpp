@@ -69,77 +69,6 @@ Part1 will be broken up into 5 separate steps
         you will need to provide 5 properties and 3 member functions of that Engine object in plain English
 */
 
-/*
-Thing 5)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-
 
 
 /*
@@ -196,6 +125,77 @@ Thing 4) Steam Locomotive
     1) detach from currently coupled train car
     2) add more coal to the furnace
     3) slam on the brakes
+ */
+
+
+/*
+Thing 5) Screen
+5 properties:
+    1) brightness (nits)
+    2) diagonal screen size
+    3) pixels per inch
+    4) refresh rate
+    5) color temperature
+3 things it can do:
+    1) adjust the brightness
+    2) adjust the color temperature
+    3) draw and display a new image
+ */
+
+/*
+Thing 6) Keyboard
+5 properties:
+    1) number of keys
+    2) brightness of backlighting
+    3) key travel distance
+    4) latency
+    5) delay until key repeat
+3 things it can do:
+    1) send key code for a single character to the driver on the computer
+    2) perform the action specified by a function key
+    3) turn on caps lock
+ */
+
+/*
+Thing 7) Hard Drive
+5 properties:
+    1) total capacity
+    2) currently used disk space
+    3) data transfer rate
+    4) power consumption
+    5) latency
+3 things it can do:
+    1) store data to disk 
+    2) retrieve data from disk
+    3) partition hard drive
+ */
+
+/*
+Thing 8) RAM
+5 properties:
+    1) number of slots
+    2) capacity per slot (GB)
+    3) clock speed (MHz)
+    4) transfer rate (MB/s)
+    5) power consumption
+3 things it can do:
+    1) load information into active memory
+    2) remove information from active memory
+    3) access information in active memory
+ */
+
+/*
+Thing 9) Operating System
+5 properties:
+    1) OS version
+    2) number of bits of processor (32/64)
+    3) number of active jobs
+    4) number of active threads
+    5) number of input devices
+3 things it can do:
+    1) swap active job
+    2) pass input to an application
+    3) update operating system version
  */
 
 /*
