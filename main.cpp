@@ -54,59 +54,59 @@ Thing: Car Wash
  */
 
 /*
-Thing 1)
+Thing 1) Burger Shack
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) total profit per day
+    2) number of burgers served per day
+    3) number of topping options
+    4) amount of beef used per week
+    5) days since the grease trap was last cleaned
 3 things it can do:
-    1)
-    2)
-    3)
+    1) serve a burger w/fries
+    2) charge the customer
+    3) clean the grill
  */
 
 /*
-Thing 2)
+Thing 2) Fishing Trawler
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of fishing nets on board
+    2) number of crew members on board
+    3) amount of fish caught per day
+    4) amount of gas remaining
+    5) distance covered per week
 3 things it can do:
-    1)
-    2)
-    3)
+    1) pull in the nets
+    2) turn to port
+    3) clean the barnacles off of the hull
  */
 
 /*
-Thing 3)
+Thing 3) Dog
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) distance traveled per day
+    2) amount of food eaten per day
+    3) top speed
+    4) age
+    5) weight
 3 things it can do:
-    1)
-    2)
-    3)
+    1) roll over
+    2) greet owners
+    3) go to sleep
  */
 
 /*
-Thing 4)
+Thing 4) Steam Locomotive
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of cars on train
+    2) amount of coal used per day
+    3) age
+    4) horsepower
+    5) number of crew on locomotive
 3 things it can do:
-    1)
-    2)
-    3)
+    1) detach from currently coupled train car
+    2) add more coal to the furnace
+    3) slam on the brakes
  */
 
 
