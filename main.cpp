@@ -334,9 +334,17 @@ struct Screen
     // color temperature (K)
     int colorTemperature = 6500;
 
-    // dummy struct to stand in for a screen image to be rendered
     struct PixelMap
     {
+        int numPixelsX = 2560;
+        int numPixelsY = 1600;
+        float numMegapixels = 4.096f;
+        int colorDepth = 24;
+        std::string aspectRatio = "16:10";
+
+        void setPixelToColor(int pixelX, int pixelY, int r, int g, int b);
+        void scaleResolution(int desiredResolutionX, int desiredResolutionY);
+        int getRedLevelOfTriad(int pixelX, int pixelY);
     };
 
     // adjust the brightness
@@ -409,9 +417,17 @@ struct HardDrive
     // latency (ms)
     float latency = 1.2f;
 
-    // dummy struct representing a block of memory
     struct DataBlock
     {
+        double size = 3.2e6;
+        int dateCreated = 03122020;
+        int lastAccessed = 04062020;
+        std::string fileName = "data.txt";
+        bool isLocked = false;
+
+        std::string getRelativePath(bool hideExtension = false);
+        void setFlag(std::string flagToSet);
+        void setDefaultApplication(int applicationId);
     };
 
     // store data to disk
@@ -449,9 +465,17 @@ struct RAM
     // power consumption (W)
     float powerConsumption = 2.75f;
 
-    // dummy struct representing a block of active memory
     struct MemoryBlock
     {
+        int size = 2.45e4;
+        bool isSRAM = false;
+        bool currentlyBeingAccessed = false;
+        double msSinceLastAccess = 45;
+        bool overheating = false;
+
+        int getCellStatus(int x, int y);
+        void setCacheLevel(int cacheLevel);
+        void flagAsCacheMiss(std::string alertMessage);
     };
 
     // load information into active memory (return address)
