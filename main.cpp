@@ -420,8 +420,8 @@ struct HardDrive
     struct DataBlock
     {
         double size = 3.2e6;
-        int dateCreated = 03122020;
-        int lastAccessed = 04062020;
+        std::string dateCreated = "3/12/2020";
+        std::string dateLastAccessed = "4/06/2020";
         std::string fileName = "data.txt";
         bool isLocked = false;
 
