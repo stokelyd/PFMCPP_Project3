@@ -125,34 +125,15 @@ struct CarWash
  */
 
 
-/*
-Thing 1) Burger Shack
-5 properties:
-    1) total profit per day
-    2) number of burgers served per day
-    3) number of topping options
-    4) amount of beef used per week
-    5) days since the grease trap was last cleaned
-3 things it can do:
-    1) serve a burger w/fries
-    2) charge the customer
-    3) clean the grill
- */
 
 struct BurgerShack
 {
-    // total profit per day
     float profitPerWeek = 745.32f;
-    // number of burgers served per day
     int numBurgersServedPerDay = 576;
-    // number of topping options
     int numToppingOptions = 12;
-    // amount of beef used per week (lbs)
     float beefUsedPerWeek = 47.5f;
-    // days since the grease trap was last cleaned
     int daysSinceGreaseTrapCleaned = 2;
     
-    // nested UDT #1
     struct Customer
     {
         std::string name = "Dave";
@@ -166,79 +147,38 @@ struct BurgerShack
         void getExtraNapkins(int numNapkins);
     };
 
-    // serve a burger w/fries
     void serveBurger(Customer customer, bool withFries);
-    // charge the customer
     float chargeCustomer(Customer customer, float discountPercentage);
-    // clean the grill
     void cleanGrill(bool extraMessToClean);
 
     Customer nextCustomerInLine;
 };
 
-/*
-Thing 2) Fishing Trawler
-5 properties:
-    1) number of fishing nets on board
-    2) number of crew members on board
-    3) amount of fish caught per day
-    4) amount of gas remaining
-    5) distance covered per week
-3 things it can do:
-    1) pull in the nets
-    2) turn to port
-    3) clean the barnacles off of the hull
- */
+
 
 struct FishingTrawler
 {
-    // number of fishing nets on board
     int numFishingNets = 3;
-    // number of crew members on board
     int numCrewMembers = 4;
-    // amount of fish caught per day (lbs)
     float amountOfFishCaughtPerDay = 323.4f;
-    // amount of gas remaining (gallons)
     float amountOfGasRemaining = 25.4f;
-    // distance traveled per week (km)
     float distanceTraveledPerWeek = 134.3f;
 
-    // pull in the nets
     void pullInNet(int netId);
-    // turn to port
     void turnToPort(int degrees);
-    // clean the barnacles off of the hull
     void cleanBarnaclesFromHull(bool inDrydock);
 };
 
-/*
-Thing 3) Dog
-5 properties:
-    1) distance traveled per day
-    2) amount of food eaten per day
-    3) top speed
-    4) age
-    5) weight
-3 things it can do:
-    1) roll over
-    2) greet owners
-    3) go to sleep
- */
+
 
 struct Dog
 {
-    // distance traveled per day (km)
     float distanceTraveledPerDay = 3.4f;
-    // amount of food eaten per day (lbs)
     float amountOfFoodEatenPerDay = 1.3f;
-    // top speed (km/hr)
     float topSpeed = 17.4f;
-    // age (yrs)
     int age = 3;
-    // weight (lbs)
     float weight = 43.2f;
 
-    // Nested UDT #2
     struct Owner
     {
         std::string name = "Nancy";
@@ -252,76 +192,36 @@ struct Dog
         int checkDogForTicks(bool extraThorough = false);
     };
 
-    // roll over
     void rollOver(bool toTheLeft);
-    // greet owners
     void greetOwner(Owner owner);
-    // go to sleep
     void goToSleep(bool pleasantDreams);
 
     Owner owner;
 };
 
-/*
-Thing 4) Steam Locomotive
-5 properties:
-    1) number of cars on train
-    2) amount of coal used per day
-    3) age
-    4) horsepower
-    5) number of crew on locomotive
-3 things it can do:
-    1) detach from currently coupled train car
-    2) add more coal to the furnace
-    3) slam on the brakes
- */
+
 
 struct SteamLocomotive
 {
-    // number of cars on train
     int numCarsOnTrain = 15;
-    // amount of coal used per day (tons)
     float amountOfCoalUsedPerDay = 7.5f;
-    // age (yrs)
     int age = 25;
-    // horsepower
     int horsepower = 4532;
-    // number of crew on locomotive
     int numCrewMembers = 2;
 
-    // detach from currently coupled train car
     void detachFromCurrentTrainCar(bool warnCrew);
-    // add more coal to the furnace
     void addCoalToFurnace(float lbsCoalToAdd);
-    // slam on the brakes
     void slamOnTheBrakes(int delayTime);
 };
 
-/*
-Thing 5) Screen
-5 properties:
-    1) brightness (nits)
-    2) diagonal screen size
-    3) pixels per inch
-    4) refresh rate
-    5) color temperature
-3 things it can do:
-    1) adjust the brightness
-    2) adjust the color temperature
-    3) draw and display a new image
- */
+
 
 struct Screen
 {
-    // brightness (nits)
     int brightness = 500;
-    // diagonal screen size (inches)
     float diagonalScreenSize = 13.3f;
-    // pixels per inch
     int pixelsPerInch = 227;
-    // refresh rate (Hz)
     int refreshRate = 60;
-    // color temperature (K)
     int colorTemperature = 6500;
 
     struct PixelMap
@@ -337,74 +237,34 @@ struct Screen
         int getRedLevelOfTriad(int pixelX, int pixelY);
     };
 
-    // adjust the brightness
     void adjustBrightness(int newBrightness);
-    // adjust the color temperature
     void adjustColorTemperature(int newColorTemperature);
-    // draw and display a new image
     void drawAndDisplayNewImage(PixelMap pixelMap);
 };
 
-/*
-Thing 6) Keyboard
-5 properties:
-    1) number of keys
-    2) brightness of backlighting
-    3) key travel distance
-    4) latency
-    5) delay until key repeat
-3 things it can do:
-    1) send key code for a single character to the driver on the computer
-    2) trigger the action specified by a function key
-    3) turn on caps lock
- */
+
 
 struct Keyboard
 {
-    // number of keys
     int numKeys = 109;
-    // brightness of backlighting (lumens)
     int backlightingBrightness = 750;
-    // key travel distance (mm)
     float travelDistance = 0.5f;
-    // latency (ms)
     float latency = 2.4f;
-    // delay until key repeat (ms)
     float delayUntilKeyRepeat = 5.6f;
 
-    // send key code for a single character to the driver on the computer
     int sendCharacterCodeToDriver(char character);
-    // trigger the action specified by a function key
     void triggerFunctionKeyAction(int functionKeyId);
-    // turn on caps lock
     void capsLockToggle(bool toStateOn);
 };
 
-/*
-Thing 7) Hard Drive
-5 properties:
-    1) total capacity
-    2) currently used disk space
-    3) data transfer rate
-    4) power consumption
-    5) latency
-3 things it can do:
-    1) store data to disk 
-    2) retrieve data from disk
-    3) partition hard drive
- */
+
 
 struct HardDrive
 {
-    // total capacity (GB)
     int totalCapacity = 500;
-    // currently used disk space
     float currentlyUsedDiskSpace = 356.43f;
-    // data transfer rate (MBps)
     int dataTransferRate = 550;
-    // power consumption (W)
     float powerConsumption = 2.7f;
-    // latency (ms)
     float latency = 1.2f;
 
     struct DataBlock
@@ -420,39 +280,19 @@ struct HardDrive
         void setDefaultApplication(int applicationId);
     };
 
-    // store data to disk
     void storeDataToDisk(DataBlock dataBlock); 
-    // retrieve data from disk
     DataBlock retrieveDataFromDisk(int address);    
-    // partition hard drive
     void partitionHardDrive(int sizeOfPartition);
 };
 
-/*
-Thing 8) RAM
-5 properties:
-    1) number of slots
-    2) capacity per slot (GB)
-    3) clock speed (MHz)
-    4) transfer rate (MB/s)
-    5) power consumption
-3 things it can do:
-    1) load information into active memory
-    2) remove information from active memory
-    3) access information in active memory
- */
+
 
 struct RAM
 {
-    // number of slots
     int numSlots = 2;
-    // capacity per slot (GB)
     int ramCapacityPerSlot = 8;
-    // clock speed (MHz)
     int clockSpeed = 1600;
-    // transfer rate (GB/s)
     float transferRate = 12.8f;
-    // power consumption (W)
     float powerConsumption = 2.75f;
 
     struct MemoryBlock
@@ -468,81 +308,38 @@ struct RAM
         void flagAsCacheMiss(std::string alertMessage);
     };
 
-    // load information into active memory (return address)
     int loadIntoActiveMemory(int address, int sizeOfMemoryBlock);
-    // remove information from active memory
     void removeFromActiveMemory(MemoryBlock memoryBlock);
-    // access information in active memory
     MemoryBlock accessFromActiveMemory(int address);
 };
 
-/*
-Thing 9) Operating System
-5 properties:
-    1) OS version
-    2) number of bits of processor (32/64)
-    3) number of active jobs
-    4) number of active threads
-    5) number of input devices
-3 things it can do:
-    1) swap active job
-    2) pass input to an application
-    3) update operating system version
- */
 
- struct OperatingSystem
- {
-    // OS version
+
+struct OperatingSystem
+{
     float osVersion = 12.3f;
-    // number of bits of processor (32/64)
     int processorBits = 64;
-    // number of active processes
     int numActiveProcesses = 372;
-    // number of active threads
     int numActiveThreads = 1960;
-    // number of input devices
     int numInputDevices = 5;
 
-    // swap active job
     void swapActiveJob(int newJobIndex);
-    // pass input to an application
     void passInputToApplication(int applicationId);
-    // update operating system version
     void updateOperatingSystemVersion(bool waitUntilTonight);
- };
+};
 
-/*
-Thing 10) Laptop Computer
-5 properties:
-    1) Screen
-    2) Keyboard
-    3) Hard Drive
-    4) RAM
-    5) Operating System
-3 things it can do:
-    1) open an application
-    2) search for wifi networks
-    3) configure preferences
- */
+
 
 struct LaptopComputer
 {
-    // Screen
     Screen screen;
-    // Keyboard
     Keyboard keyboard;
-    // Hard Drive
     HardDrive hardDrive;
-    // RAM
     RAM ram;
-    // Operating System
     OperatingSystem operatingSystem;
 
-    // open an application
     void openApplication(int applicationId);
-    // search for wifi networks
     std::string searchForWifiNetworks(bool trustedNetworksOnly);
-    // configure preferences
     void configurePreferences(bool flagAsUpdateReady);
 };
 
