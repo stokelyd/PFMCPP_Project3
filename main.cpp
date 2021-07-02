@@ -108,8 +108,54 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
 
+    struct Foot
+    {
+        int lengthOfStride = 30;
 
+        void stepForward();
+        int stepSize();
+    };
+
+    Foot leftFoot;
+    Foot rightFoot;
+
+    void run(int howFast, bool startWithLeftFoot);
+};
+
+void Person::run(int howFast, bool startWithLeftFoot)
+{
+    if(startWithLeftFoot == true)
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+    }
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+    }
+
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+    std::cout << "Two steps taken at " << howFast << "km/hr" << std::endl;
+}
+
+void Person::Foot::stepForward()
+{
+}
+
+int Person::Foot::stepSize()
+{
+    return lengthOfStride;
+}
 
 
  /*
@@ -126,33 +172,16 @@ struct CarWash
 
 
 /*
-Thing 1) Burger Shack
-5 properties:
-    1) total profit per day
-    2) number of burgers served per day
-    3) number of topping options
-    4) amount of beef used per week
-    5) days since the grease trap was last cleaned
-3 things it can do:
-    1) serve a burger w/fries
-    2) charge the customer
-    3) clean the grill
- */
-
+UDT #1
+*/
 struct BurgerShack
 {
-    // total profit per day
     float profitPerWeek = 745.32f;
-    // number of burgers served per day
     int numBurgersServedPerDay = 576;
-    // number of topping options
     int numToppingOptions = 12;
-    // amount of beef used per week (lbs)
     float beefUsedPerWeek = 47.5f;
-    // days since the grease trap was last cleaned
     int daysSinceGreaseTrapCleaned = 2;
     
-    // nested UDT #1
     struct Customer
     {
         std::string name = "Dave";
@@ -166,79 +195,114 @@ struct BurgerShack
         void getExtraNapkins(int numNapkins);
     };
 
-    // serve a burger w/fries
     void serveBurger(Customer customer, bool withFries);
-    // charge the customer
     float chargeCustomer(Customer customer, float discountPercentage);
-    // clean the grill
     void cleanGrill(bool extraMessToClean);
 
     Customer nextCustomerInLine;
 };
 
-/*
-Thing 2) Fishing Trawler
-5 properties:
-    1) number of fishing nets on board
-    2) number of crew members on board
-    3) amount of fish caught per day
-    4) amount of gas remaining
-    5) distance covered per week
-3 things it can do:
-    1) pull in the nets
-    2) turn to port
-    3) clean the barnacles off of the hull
- */
+void BurgerShack::serveBurger(Customer customer, bool withFries)
+{
+    std::cout << "Served burger to " << customer.name << std::endl;
+    if(withFries)
+    {
+        std::cout << "with a side of fries" << std::endl;
+    }
+}
 
+float BurgerShack::chargeCustomer(Customer customer, float discountPercentage)
+{
+    float costOfMeal = 5.75f;
+    float amountToCharge = costOfMeal - (costOfMeal * discountPercentage);
+
+    std::cout << "Charged " << customer.name << amountToCharge << "dollars";
+    return amountToCharge;
+}
+
+void cleanGrill(bool extraMessToClean)
+{
+    std::cout << "Cleaned the grill..." << std::endl;
+
+    if(extraMessToClean)
+    {
+        std::cout << "...it was really gross." << std::endl;   
+    }
+}
+
+
+void BurgerShack::Customer::payForMeal(float amountOwed, bool tip)
+{
+    if(tip)
+    {
+        amountOwed += amountOwed * 0.15f;
+    }
+
+    std::cout << "Paid " << amountOwed << "dollars" << std::endl;
+}
+
+float BurgerShack::Customer::checkHowMuchSodaLeftInCup(bool removeLid)
+{
+    float estimatedAmountOfSodaLeft = removeLid ? 0.231f : 0.25f;
+
+    return estimatedAmountOfSodaLeft;
+}
+
+void BurgerShack::Customer::getExtraNapkins(int numNapkins)
+{
+    std::cout << "Got " << numNapkins << " extra napkins" << std::endl;
+}
+
+
+
+/*
+UDT #2
+*/
 struct FishingTrawler
 {
-    // number of fishing nets on board
     int numFishingNets = 3;
-    // number of crew members on board
     int numCrewMembers = 4;
-    // amount of fish caught per day (lbs)
     float amountOfFishCaughtPerDay = 323.4f;
-    // amount of gas remaining (gallons)
     float amountOfGasRemaining = 25.4f;
-    // distance traveled per week (km)
     float distanceTraveledPerWeek = 134.3f;
 
-    // pull in the nets
     void pullInNet(int netId);
-    // turn to port
     void turnToPort(int degrees);
-    // clean the barnacles off of the hull
     void cleanBarnaclesFromHull(bool inDrydock);
 };
 
-/*
-Thing 3) Dog
-5 properties:
-    1) distance traveled per day
-    2) amount of food eaten per day
-    3) top speed
-    4) age
-    5) weight
-3 things it can do:
-    1) roll over
-    2) greet owners
-    3) go to sleep
- */
+void FishingTrawler::pullInNet(int netId)
+{
+    std::cout << "Pulled in net #" << netId << std::endl;
+}
 
+void FishingTrawler::turnToPort(int degrees)
+{
+    std::cout << "Turned " << degrees << " degrees to port";
+}
+
+void FishingTrawler::cleanBarnaclesFromHull(bool inDrydock)
+{
+    std::cout << "Cleaned the barnacles off of the hull" << std::endl;
+
+    if(inDrydock)
+    {
+        std::cout << "(very thoroughly, b/c the boat was in drydock)";
+    }
+}
+
+
+/*
+UDT #3
+*/
 struct Dog
 {
-    // distance traveled per day (km)
     float distanceTraveledPerDay = 3.4f;
-    // amount of food eaten per day (lbs)
     float amountOfFoodEatenPerDay = 1.3f;
-    // top speed (km/hr)
     float topSpeed = 17.4f;
-    // age (yrs)
     int age = 3;
-    // weight (lbs)
     float weight = 43.2f;
 
-    // Nested UDT #2
     struct Owner
     {
         std::string name = "Nancy";
@@ -252,76 +316,110 @@ struct Dog
         int checkDogForTicks(bool extraThorough = false);
     };
 
-    // roll over
     void rollOver(bool toTheLeft);
-    // greet owners
     void greetOwner(Owner owner);
-    // go to sleep
     void goToSleep(bool pleasantDreams);
 
-    Owner owner;
+    Owner ownerNancy;
 };
 
-/*
-Thing 4) Steam Locomotive
-5 properties:
-    1) number of cars on train
-    2) amount of coal used per day
-    3) age
-    4) horsepower
-    5) number of crew on locomotive
-3 things it can do:
-    1) detach from currently coupled train car
-    2) add more coal to the furnace
-    3) slam on the brakes
- */
+void Dog::rollOver(bool toTheLeft)
+{  
+    std::string rollDirection = toTheLeft ? "left." : "right.";
 
+    std::cout << "Rolled over to the " << rollDirection << std::endl;   
+}
+
+void Dog::greetOwner(Owner owner)
+{
+    std::cout << "Said hello to " << owner.name << std::endl; 
+}
+
+void Dog::goToSleep(bool pleasantDreams)
+{
+    std::cout << "Went to sleep..." << std::endl;
+
+    if(pleasantDreams)
+    {
+        std::cout << "...and slept peacefully." << std::endl;
+    }
+    else
+    {
+        std::cout << "...but had nightmares." << std::endl;
+    }
+}
+
+
+void Dog::Owner::walkTheDog(float distanceToTravel, float initialSpeed)
+{
+    std::cout << "Took the dog for a walk, starting at " << initialSpeed << "km/hr and traveling " << distanceToTravel << "km." << std::endl;
+}
+
+void Dog::Owner::feedTheDog(float amountOfFood, bool isDryFood)
+{
+    std::string foodType = isDryFood ? "dry food" : "wet food";
+
+    std::cout << "Fed the dog " << amountOfFood << "lbs of " << foodType << std::endl;
+}
+
+int Dog::Owner::checkDogForTicks(bool extraThorough)
+{
+    if(extraThorough)
+    {
+        return 3;
+    }
+
+    return 2;
+}
+
+
+
+/*
+UDT #4
+*/
 struct SteamLocomotive
 {
-    // number of cars on train
     int numCarsOnTrain = 15;
-    // amount of coal used per day (tons)
     float amountOfCoalUsedPerDay = 7.5f;
-    // age (yrs)
     int age = 25;
-    // horsepower
     int horsepower = 4532;
-    // number of crew on locomotive
     int numCrewMembers = 2;
 
-    // detach from currently coupled train car
     void detachFromCurrentTrainCar(bool warnCrew);
-    // add more coal to the furnace
     void addCoalToFurnace(float lbsCoalToAdd);
-    // slam on the brakes
     void slamOnTheBrakes(int delayTime);
 };
 
-/*
-Thing 5) Screen
-5 properties:
-    1) brightness (nits)
-    2) diagonal screen size
-    3) pixels per inch
-    4) refresh rate
-    5) color temperature
-3 things it can do:
-    1) adjust the brightness
-    2) adjust the color temperature
-    3) draw and display a new image
- */
+void SteamLocomotive::detachFromCurrentTrainCar(bool warnCrew)
+{
+    if(warnCrew)
+    {
+        std::cout << "Warned the crew and..." << std::endl;
+    }
 
+    std::cout << "Detached the locomotive from the currently attached train car." << std::endl;
+}
+
+void SteamLocomotive::addCoalToFurnace(float lbsCoalToAdd)
+{
+    std::cout << "Added " << lbsCoalToAdd << "lbs of coal to the furnace." << std::endl;
+}
+
+void SteamLocomotive::slamOnTheBrakes(int delayTime)
+{
+    std::cout << "After " << delayTime << " seconds, slammed on the brakes" << std::endl;
+}
+
+
+/*
+UDT #5
+*/
 struct Screen
 {
-    // brightness (nits)
     int brightness = 500;
-    // diagonal screen size (inches)
     float diagonalScreenSize = 13.3f;
-    // pixels per inch
     int pixelsPerInch = 227;
-    // refresh rate (Hz)
     int refreshRate = 60;
-    // color temperature (K)
     int colorTemperature = 6500;
 
     struct PixelMap
@@ -337,74 +435,89 @@ struct Screen
         int getRedLevelOfTriad(int pixelX, int pixelY);
     };
 
-    // adjust the brightness
     void adjustBrightness(int newBrightness);
-    // adjust the color temperature
     void adjustColorTemperature(int newColorTemperature);
-    // draw and display a new image
     void drawAndDisplayNewImage(PixelMap pixelMap);
 };
 
-/*
-Thing 6) Keyboard
-5 properties:
-    1) number of keys
-    2) brightness of backlighting
-    3) key travel distance
-    4) latency
-    5) delay until key repeat
-3 things it can do:
-    1) send key code for a single character to the driver on the computer
-    2) trigger the action specified by a function key
-    3) turn on caps lock
- */
+void Screen::adjustBrightness(int newBrightness)
+{
+    std::cout << "Set the screen brightness to " << newBrightness << "nits." << std::endl;
+}
 
+void Screen::adjustColorTemperature(int newColorTemperature)
+{
+    std::cout << "set the screen color temperature to " << newColorTemperature << " K." << std::endl;
+}
+
+void Screen::drawAndDisplayNewImage(PixelMap pixelMap)
+{
+    std::cout << "Drew and displayed a new image at aspect ratio " << pixelMap.aspectRatio << std::endl;
+}
+
+
+void Screen::PixelMap::setPixelToColor(int pixelX, int pixelY, int r, int g, int b)
+{
+    std::cout << "Set to pixel at coordinates " << pixelX << ", " << pixelY << " to rgb value " << r << g << b << std::endl;
+}
+
+void Screen::PixelMap::scaleResolution(int desiredResolutionX, int desiredResolutionY)
+{
+    std::cout << "scale mapped pixel resolution to " << desiredResolutionX << " x " << desiredResolutionY << std::endl;
+}
+
+int Screen::PixelMap::getRedLevelOfTriad(int pixelX, int pixelY)
+{
+    int dummyRedLevel = 146;
+    std::cout << "Get the red vales of the triad at location " << pixelX << ", " << pixelY << std::endl;
+    return dummyRedLevel;
+}
+
+
+
+/*
+UDT #6
+*/
 struct Keyboard
 {
-    // number of keys
     int numKeys = 109;
-    // brightness of backlighting (lumens)
     int backlightingBrightness = 750;
-    // key travel distance (mm)
     float travelDistance = 0.5f;
-    // latency (ms)
     float latency = 2.4f;
-    // delay until key repeat (ms)
     float delayUntilKeyRepeat = 5.6f;
 
-    // send key code for a single character to the driver on the computer
     int sendCharacterCodeToDriver(char character);
-    // trigger the action specified by a function key
     void triggerFunctionKeyAction(int functionKeyId);
-    // turn on caps lock
     void capsLockToggle(bool toStateOn);
 };
 
-/*
-Thing 7) Hard Drive
-5 properties:
-    1) total capacity
-    2) currently used disk space
-    3) data transfer rate
-    4) power consumption
-    5) latency
-3 things it can do:
-    1) store data to disk 
-    2) retrieve data from disk
-    3) partition hard drive
- */
+int Keyboard::sendCharacterCodeToDriver(char character)
+{
+    int asciiCode = int(character);
+    std::cout << "Sent the ASCII code " << asciiCode << " to the driver." << std::endl;
+    return asciiCode;
+}
 
+void Keyboard::triggerFunctionKeyAction(int functionKeyId)
+{
+    std::cout << "Triggered the function associated with keyId " << functionKeyId << std::endl;
+}
+void Keyboard::capsLockToggle(bool toStateOn)
+{
+    std::string state = toStateOn ? "ON." : "OFF.";
+
+    std::cout << "Set caps lock state to " << state << std::endl;
+}
+
+/*
+UDT #7
+*/
 struct HardDrive
 {
-    // total capacity (GB)
     int totalCapacity = 500;
-    // currently used disk space
     float currentlyUsedDiskSpace = 356.43f;
-    // data transfer rate (MBps)
     int dataTransferRate = 550;
-    // power consumption (W)
     float powerConsumption = 2.7f;
-    // latency (ms)
     float latency = 1.2f;
 
     struct DataBlock
@@ -420,39 +533,57 @@ struct HardDrive
         void setDefaultApplication(int applicationId);
     };
 
-    // store data to disk
     void storeDataToDisk(DataBlock dataBlock); 
-    // retrieve data from disk
     DataBlock retrieveDataFromDisk(int address);    
-    // partition hard drive
     void partitionHardDrive(int sizeOfPartition);
 };
 
-/*
-Thing 8) RAM
-5 properties:
-    1) number of slots
-    2) capacity per slot (GB)
-    3) clock speed (MHz)
-    4) transfer rate (MB/s)
-    5) power consumption
-3 things it can do:
-    1) load information into active memory
-    2) remove information from active memory
-    3) access information in active memory
- */
+void HardDrive::storeDataToDisk(DataBlock dataBlock)
+{
+    std::cout << "Stored the block of data with filename " << dataBlock.fileName << " to disk." << std::endl;
+}
 
+HardDrive::DataBlock HardDrive::retrieveDataFromDisk(int address)
+{
+    DataBlock dummyRetrivalBlock;
+    std::cout << "Retrived the block of data from address " << address << std::endl;
+    return dummyRetrivalBlock;
+}
+
+void HardDrive::partitionHardDrive(int sizeOfPartition)
+{
+    std::cout << "Created a new partition of size " << sizeOfPartition << "bits." << std::endl;
+}
+
+
+std::string HardDrive::DataBlock::getRelativePath(bool hideExtension)
+{
+    std::string relativePath = hideExtension ? "block" : "block.txt";
+
+    return relativePath;
+}
+
+void HardDrive::DataBlock::setFlag(std::string flagToSet)
+{
+    std::cout << "Set flag " << flagToSet << std::endl;
+}
+
+void HardDrive::DataBlock::setDefaultApplication(int applicationId)
+{
+    std::cout << "Set default application to the application with ID " << applicationId << std::endl;
+}
+
+
+
+/*
+UDT #8
+*/
 struct RAM
 {
-    // number of slots
     int numSlots = 2;
-    // capacity per slot (GB)
     int ramCapacityPerSlot = 8;
-    // clock speed (MHz)
     int clockSpeed = 1600;
-    // transfer rate (GB/s)
     float transferRate = 12.8f;
-    // power consumption (W)
     float powerConsumption = 2.75f;
 
     struct MemoryBlock
@@ -468,85 +599,135 @@ struct RAM
         void flagAsCacheMiss(std::string alertMessage);
     };
 
-    // load information into active memory (return address)
     int loadIntoActiveMemory(int address, int sizeOfMemoryBlock);
-    // remove information from active memory
     void removeFromActiveMemory(MemoryBlock memoryBlock);
-    // access information in active memory
     MemoryBlock accessFromActiveMemory(int address);
 };
 
-/*
-Thing 9) Operating System
-5 properties:
-    1) OS version
-    2) number of bits of processor (32/64)
-    3) number of active jobs
-    4) number of active threads
-    5) number of input devices
-3 things it can do:
-    1) swap active job
-    2) pass input to an application
-    3) update operating system version
- */
+int RAM::loadIntoActiveMemory(int address, int sizeOfMemoryBlock)
+{
+    int activeMemoryAddress = 35423;
+    std::cout << "Loaded " << sizeOfMemoryBlock << " bits from address " << address << "into active memory at address " << activeMemoryAddress << std::endl;
+    return activeMemoryAddress;
+}
 
- struct OperatingSystem
- {
-    // OS version
+void RAM::removeFromActiveMemory(MemoryBlock memoryBlock)
+{
+    std::cout << "Removed a block of memory of size " << memoryBlock.size << " from active memory" << std::endl;
+}
+
+RAM::MemoryBlock RAM::accessFromActiveMemory(int address)
+{
+    MemoryBlock dummyRetrivalBlock;
+    std::cout << "Accessed the memory block at address " << address << std::endl;
+    return dummyRetrivalBlock;
+}
+
+
+int RAM::MemoryBlock::getCellStatus(int x, int y)
+{
+    int status = 1;
+    std::cout << "Get the status of the cell at " << x << ", " << y << std::endl;
+    return status;
+}
+
+void RAM::MemoryBlock::setCacheLevel(int cacheLevel)
+{
+    std::cout << "Set cache level to " << cacheLevel << std::endl;
+}
+
+void RAM::MemoryBlock::flagAsCacheMiss(std::string alertMessage)
+{
+    std::cout << "Cache miss with message " << alertMessage << std::endl;
+}
+
+
+
+/*
+UDT #9
+*/
+struct OperatingSystem
+{
     float osVersion = 12.3f;
-    // number of bits of processor (32/64)
     int processorBits = 64;
-    // number of active processes
     int numActiveProcesses = 372;
-    // number of active threads
     int numActiveThreads = 1960;
-    // number of input devices
     int numInputDevices = 5;
 
-    // swap active job
     void swapActiveJob(int newJobIndex);
-    // pass input to an application
     void passInputToApplication(int applicationId);
-    // update operating system version
     void updateOperatingSystemVersion(bool waitUntilTonight);
- };
+};
+
+void OperatingSystem::swapActiveJob(int newJobIndex)
+{
+    std::cout << "Swapped active job to the job at index " << newJobIndex << std::endl;
+}
+void OperatingSystem::passInputToApplication(int applicationId)
+{
+    std::cout << "Passed device input to the application with ID " << applicationId << std::endl;
+}
+
+void OperatingSystem::updateOperatingSystemVersion(bool waitUntilTonight)
+{
+    if (waitUntilTonight)
+    {
+        std::cout << "The OS will update later tonight." << std::endl;
+    }
+    else
+    {
+        std::cout << "The OS will now update." << std::endl;
+    }
+}
+
+
 
 /*
-Thing 10) Laptop Computer
-5 properties:
-    1) Screen
-    2) Keyboard
-    3) Hard Drive
-    4) RAM
-    5) Operating System
-3 things it can do:
-    1) open an application
-    2) search for wifi networks
-    3) configure preferences
- */
-
+UDT #10
+*/
 struct LaptopComputer
 {
-    // Screen
     Screen screen;
-    // Keyboard
     Keyboard keyboard;
-    // Hard Drive
     HardDrive hardDrive;
-    // RAM
     RAM ram;
-    // Operating System
     OperatingSystem operatingSystem;
 
-    // open an application
     void openApplication(int applicationId);
-    // search for wifi networks
     std::string searchForWifiNetworks(bool trustedNetworksOnly);
-    // configure preferences
     void configurePreferences(bool flagAsUpdateReady);
 };
 
+void LaptopComputer::openApplication(int applicationId)
+{
+    std::cout << "Opened the application with ID " << applicationId << std::endl;
+}
 
+std::string LaptopComputer::searchForWifiNetworks(bool trustedNetworksOnly)
+{
+    std::string someSketchyNetwork = "123579283asfgh";
+
+    if (trustedNetworksOnly)
+    {
+        std::cout << "No trusted networks found, expand search?" << std::endl;
+        return std::string();
+    }
+    else
+    {
+        std::cout << "Found network: " << someSketchyNetwork << std::endl;
+        return someSketchyNetwork;
+    }
+}
+
+void LaptopComputer::configurePreferences(bool flagAsUpdateReady)
+{
+    std::cout << "Opening preferences window..." << std::endl;
+
+    if(flagAsUpdateReady)
+    {
+        std::cout << "Alert: an update is available." << std::endl;
+    }
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
