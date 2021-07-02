@@ -243,16 +243,7 @@ void BurgerShack::Customer::payForMeal(float amountOwed, bool tip)
 
 float BurgerShack::Customer::checkHowMuchSodaLeftInCup(bool removeLid)
 {
-    float estimatedAmountOfSodaLeft;
-
-    if(removeLid)
-    {
-        estimatedAmountOfSodaLeft = 0.231f;
-    }
-    else
-    {
-        estimatedAmountOfSodaLeft = 0.25f;
-    }
+    float estimatedAmountOfSodaLeft = removeLid ? 0.231f : 0.25f;
 
     return estimatedAmountOfSodaLeft;
 }
@@ -334,15 +325,7 @@ struct Dog
 
 void Dog::rollOver(bool toTheLeft)
 {  
-    std::string rollDirection;
-    if(toTheLeft)
-    {
-        rollDirection = "left.";
-    }
-    else
-    {
-        rollDirection = "right.";
-    }
+    std::string rollDirection = toTheLeft ? "left." : "right.";
 
     std::cout << "Rolled over to the " << rollDirection << std::endl;   
 }
@@ -374,15 +357,7 @@ void Dog::Owner::walkTheDog(float distanceToTravel, float initialSpeed)
 
 void Dog::Owner::feedTheDog(float amountOfFood, bool isDryFood)
 {
-    std::string foodType;
-    if(isDryFood)
-    {
-        foodType = "dry food";
-    }
-    else
-    {
-        foodType = "wet food";
-    }
+    std::string foodType = isDryFood ? "dry food" : "wet food";
 
     std::cout << "Fed the dog " << amountOfFood << "lbs of " << foodType << std::endl;
 }
@@ -393,10 +368,8 @@ int Dog::Owner::checkDogForTicks(bool extraThorough)
     {
         return 3;
     }
-    else
-    {
-        return 2;
-    }
+
+    return 2;
 }
 
 
@@ -531,15 +504,7 @@ void Keyboard::triggerFunctionKeyAction(int functionKeyId)
 }
 void Keyboard::capsLockToggle(bool toStateOn)
 {
-    std::string state;
-    if (toStateOn)
-    {
-        state = "ON.";
-    }
-    else
-    {
-        state = "OFF.";
-    }
+    std::string state = toStateOn ? "ON." : "OFF.";
 
     std::cout << "Set caps lock state to " << state << std::endl;
 }
@@ -593,15 +558,7 @@ void HardDrive::partitionHardDrive(int sizeOfPartition)
 
 std::string HardDrive::DataBlock::getRelativePath(bool hideExtension)
 {
-    std::string relativePath;
-    if (hideExtension)
-    {
-        relativePath = "block";
-    }
-    else
-    {
-        relativePath = "block.txt";
-    }
+    std::string relativePath = hideExtension ? "block" : "block.txt";
 
     return relativePath;
 }
