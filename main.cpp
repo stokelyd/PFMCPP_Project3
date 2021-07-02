@@ -171,7 +171,9 @@ int Person::Foot::stepSize()
  */
 
 
-
+/*
+UDT #1
+*/
 struct BurgerShack
 {
     float profitPerWeek = 745.32f;
@@ -200,8 +202,38 @@ struct BurgerShack
     Customer nextCustomerInLine;
 };
 
+void BurgerShack::serveBurger(Customer customer, bool withFries)
+{
+    std::cout << "Served burger to " << customer.name << std::endl;
+    if(withFries)
+    {
+        std::cout << "with a side of fries" << std::endl;
+    }
+}
+
+float BurgerShack::chargeCustomer(Customer customer, float discountPercentage)
+{
+    float costOfMeal = 5.75f;
+    float amountToCharge = costOfMeal - (costOfMeal * discountPercentage);
+
+    std::cout << "Charged " << customer.name << amountToCharge << "dollars";
+    return amountToCharge;
+}
+
+void cleanGrill(bool extraMessToClean)
+{
+    std::cout << "Cleaned the grill..." << std::endl;
+
+    if(extraMessToClean)
+    {
+        std::cout << "...it was really gross." << std::endl;   
+    }
+}
 
 
+/*
+UDT #2
+*/
 struct FishingTrawler
 {
     int numFishingNets = 3;
@@ -215,8 +247,30 @@ struct FishingTrawler
     void cleanBarnaclesFromHull(bool inDrydock);
 };
 
+void FishingTrawler::pullInNet(int netId)
+{
+    std::cout << "Pulled in net #" << netId << std::endl;
+}
+
+void FishingTrawler::turnToPort(int degrees)
+{
+    std::cout << "Turned " << degrees << " degrees to port";
+}
+
+void FishingTrawler::cleanBarnaclesFromHull(bool inDrydock)
+{
+    std::cout << "Cleaned the barnacles off of the hull" << std::endl;
+
+    if(inDrydock)
+    {
+        std::cout << "(very thoroughly, b/c the boat was in drydock)";
+    }
+}
 
 
+/*
+UDT #3
+*/
 struct Dog
 {
     float distanceTraveledPerDay = 3.4f;
@@ -242,11 +296,49 @@ struct Dog
     void greetOwner(Owner owner);
     void goToSleep(bool pleasantDreams);
 
-    Owner owner;
+    Owner ownerNancy;
 };
 
+void Dog::rollOver(bool toTheLeft)
+{  
+    std::string rollDirection;
+    if(toTheLeft)
+    {
+        rollDirection = "left.";
+    }
+    else
+    {
+        rollDirection = "right.";
+    }
+
+    std::cout << "Rolled over to the " << rollDirection << std::endl;
+
+    
+}
+
+void Dog::greetOwner(Owner owner)
+{
+    std::cout << "Said hello to " << owner.name << std::endl; 
+}
+
+void Dog::goToSleep(bool pleasantDreams)
+{
+    std::cout << "Went to sleep..." << std::endl;
+
+    if(pleasantDreams)
+    {
+        std::cout << "...and slept peacefully." << std::endl;
+    }
+    else
+    {
+        std::cout << "...but had nightmares." << std::endl;
+    }
+}
 
 
+/*
+UDT #4
+*/
 struct SteamLocomotive
 {
     int numCarsOnTrain = 15;
@@ -260,8 +352,30 @@ struct SteamLocomotive
     void slamOnTheBrakes(int delayTime);
 };
 
+void SteamLocomotive::detachFromCurrentTrainCar(bool warnCrew)
+{
+    if(warnCrew)
+    {
+        std::cout << "Warned the crew and..." << std::endl;
+    }
+
+    std::cout << "Detached the locomotive from the currently attached train car." << std::endl;
+}
+
+void SteamLocomotive::addCoalToFurnace(float lbsCoalToAdd)
+{
+    std::cout << "Added " << lbsCoalToAdd << "lbs of coal to the furnace." << std::endl;
+}
+
+void SteamLocomotive::slamOnTheBrakes(int delayTime)
+{
+    std::cout << "After " << delayTime << " seconds, slammed on the brakes" << std::endl;
+}
 
 
+/*
+UDT #5
+*/
 struct Screen
 {
     int brightness = 500;
@@ -288,8 +402,24 @@ struct Screen
     void drawAndDisplayNewImage(PixelMap pixelMap);
 };
 
+void Screen::adjustBrightness(int newBrightness)
+{
+    std::cout << "Set the screen brightness to " << newBrightness << "nits." << std::endl;
+}
 
+void Screen::adjustColorTemperature(int newColorTemperature)
+{
+    std::cout << "set the screen color temperature to " << newColorTemperature << " K." << std::endl;
+}
 
+void Screen::drawAndDisplayNewImage(PixelMap pixelMap)
+{
+    std::cout << "Drew and displayed a new image at aspect ratio " << pixelMap.aspectRatio << std::endl;
+}
+
+/*
+UDT #6
+*/
 struct Keyboard
 {
     int numKeys = 109;
@@ -303,8 +433,35 @@ struct Keyboard
     void capsLockToggle(bool toStateOn);
 };
 
+int Keyboard::sendCharacterCodeToDriver(char character)
+{
+    int asciiCode = int(character);
+    std::cout << "Sent the ASCII code " << asciiCode << " to the driver." << std::endl;
+    return asciiCode;
+}
 
+void Keyboard::triggerFunctionKeyAction(int functionKeyId)
+{
+    std::cout << "Triggered the function associated with keyId " << functionKeyId << std::endl;
+}
+void Keyboard::capsLockToggle(bool toStateOn)
+{
+    std::string state;
+    if (toStateOn)
+    {
+        state = "ON.";
+    }
+    else
+    {
+        state = "OFF.";
+    }
 
+    std::cout << "Set caps lock state to " << state << std::endl;
+}
+
+/*
+UDT #7
+*/
 struct HardDrive
 {
     int totalCapacity = 500;
@@ -331,8 +488,26 @@ struct HardDrive
     void partitionHardDrive(int sizeOfPartition);
 };
 
+void HardDrive::storeDataToDisk(DataBlock dataBlock)
+{
+    std::cout << "Stored the block of data with filename " << dataBlock.fileName << " to disk." << std::endl;
+}
 
+HardDrive::DataBlock HardDrive::retrieveDataFromDisk(int address)
+{
+    DataBlock dummyRetrivalBlock;
+    std::cout << "Retrived the block of data from address " << address << std::endl;
+    return dummyRetrivalBlock;
+}
 
+void HardDrive::partitionHardDrive(int sizeOfPartition)
+{
+    std::cout << "Created a new partition of size " << sizeOfPartition << "bits." << std::endl;
+}
+
+/*
+UDT #8
+*/
 struct RAM
 {
     int numSlots = 2;
@@ -359,8 +534,30 @@ struct RAM
     MemoryBlock accessFromActiveMemory(int address);
 };
 
+int RAM::loadIntoActiveMemory(int address, int sizeOfMemoryBlock)
+{
+    int activeMemoryAddress = 35423;
+    std::cout << "Loaded " << sizeOfMemoryBlock << " bits from address " << address << "into active memory at address " << activeMemoryAddress << std::endl;
+    return activeMemoryAddress;
+}
+
+void RAM::removeFromActiveMemory(MemoryBlock memoryBlock)
+{
+    std::cout << "Removed a block of memory of size " << memoryBlock.size << " from active memory" << std::endl;
+}
+
+RAM::MemoryBlock RAM::accessFromActiveMemory(int address)
+{
+    MemoryBlock dummyRetrivalBlock;
+    std::cout << "Accessed the memory block at address " << address << std::endl;
+    return dummyRetrivalBlock;
+}
 
 
+
+/*
+UDT #9
+*/
 struct OperatingSystem
 {
     float osVersion = 12.3f;
@@ -374,8 +571,32 @@ struct OperatingSystem
     void updateOperatingSystemVersion(bool waitUntilTonight);
 };
 
+void OperatingSystem::swapActiveJob(int newJobIndex)
+{
+    std::cout << "Swapped active job to the job at index " << newJobIndex << std::endl;
+}
+void OperatingSystem::passInputToApplication(int applicationId)
+{
+    std::cout << "Passed device input to the application with ID " << applicationId << std::endl;
+}
+
+void OperatingSystem::updateOperatingSystemVersion(bool waitUntilTonight)
+{
+    if (waitUntilTonight)
+    {
+        std::cout << "The OS will update later tonight." << std::endl;
+    }
+    else
+    {
+        std::cout << "The OS will now update." << std::endl;
+    }
+}
 
 
+
+/*
+UDT #10
+*/
 struct LaptopComputer
 {
     Screen screen;
@@ -389,7 +610,36 @@ struct LaptopComputer
     void configurePreferences(bool flagAsUpdateReady);
 };
 
+void LaptopComputer::openApplication(int applicationId)
+{
+    std::cout << "Opened the application with ID " << applicationId << std::endl;
+}
 
+std::string LaptopComputer::searchForWifiNetworks(bool trustedNetworksOnly)
+{
+    std::string someSketchyNetwork = "123579283asfgh";
+
+    if (trustedNetworksOnly)
+    {
+        std::cout << "No trusted networks found, expand search?" << std::endl;
+        return std::string();
+    }
+    else
+    {
+        std::cout << "Found network: " << someSketchyNetwork << std::endl;
+        return someSketchyNetwork;
+    }
+}
+
+void LaptopComputer::configurePreferences(bool flagAsUpdateReady)
+{
+    std::cout << "Opening preferences window..." << std::endl;
+
+    if(flagAsUpdateReady)
+    {
+        std::cout << "Alert: an update is available." << std::endl;
+    }
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
