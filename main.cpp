@@ -231,6 +231,39 @@ void cleanGrill(bool extraMessToClean)
 }
 
 
+void BurgerShack::Customer::payForMeal(float amountOwed, bool tip)
+{
+    if(tip)
+    {
+        amountOwed += amountOwed * 0.15f;
+    }
+
+    std::cout << "Paid " << amountOwed << "dollars" << std::endl;
+}
+
+float BurgerShack::Customer::checkHowMuchSodaLeftInCup(bool removeLid)
+{
+    float estimatedAmountOfSodaLeft;
+
+    if(removeLid)
+    {
+        estimatedAmountOfSodaLeft = 0.231f;
+    }
+    else
+    {
+        estimatedAmountOfSodaLeft = 0.25f;
+    }
+
+    return estimatedAmountOfSodaLeft;
+}
+
+void BurgerShack::Customer::getExtraNapkins(int numNapkins)
+{
+    std::cout << "Got " << numNapkins << " extra napkins" << std::endl;
+}
+
+
+
 /*
 UDT #2
 */
@@ -311,9 +344,7 @@ void Dog::rollOver(bool toTheLeft)
         rollDirection = "right.";
     }
 
-    std::cout << "Rolled over to the " << rollDirection << std::endl;
-
-    
+    std::cout << "Rolled over to the " << rollDirection << std::endl;   
 }
 
 void Dog::greetOwner(Owner owner)
@@ -334,6 +365,40 @@ void Dog::goToSleep(bool pleasantDreams)
         std::cout << "...but had nightmares." << std::endl;
     }
 }
+
+
+void Dog::Owner::walkTheDog(float distanceToTravel, float initialSpeed)
+{
+    std::cout << "Took the dog for a walk, starting at " << initialSpeed << "km/hr and traveling " << distanceToTravel << "km." << std::endl;
+}
+
+void Dog::Owner::feedTheDog(float amountOfFood, bool isDryFood)
+{
+    std::string foodType;
+    if(isDryFood)
+    {
+        foodType = "dry food";
+    }
+    else
+    {
+        foodType = "wet food";
+    }
+
+    std::cout << "Fed the dog " << amountOfFood << "lbs of " << foodType << std::endl;
+}
+
+int Dog::Owner::checkDogForTicks(bool extraThorough)
+{
+    if(extraThorough)
+    {
+        return 3;
+    }
+    else
+    {
+        return 2;
+    }
+}
+
 
 
 /*
@@ -416,6 +481,26 @@ void Screen::drawAndDisplayNewImage(PixelMap pixelMap)
 {
     std::cout << "Drew and displayed a new image at aspect ratio " << pixelMap.aspectRatio << std::endl;
 }
+
+
+void Screen::PixelMap::setPixelToColor(int pixelX, int pixelY, int r, int g, int b)
+{
+    std::cout << "Set to pixel at coordinates " << pixelX << ", " << pixelY << " to rgb value " << r << g << b << std::endl;
+}
+
+void Screen::PixelMap::scaleResolution(int desiredResolutionX, int desiredResolutionY)
+{
+    std::cout << "scale mapped pixel resolution to " << desiredResolutionX << " x " << desiredResolutionY << std::endl;
+}
+
+int Screen::PixelMap::getRedLevelOfTriad(int pixelX, int pixelY)
+{
+    int dummyRedLevel = 146;
+    std::cout << "Get the red vales of the triad at location " << pixelX << ", " << pixelY << std::endl;
+    return dummyRedLevel;
+}
+
+
 
 /*
 UDT #6
@@ -505,6 +590,34 @@ void HardDrive::partitionHardDrive(int sizeOfPartition)
     std::cout << "Created a new partition of size " << sizeOfPartition << "bits." << std::endl;
 }
 
+
+std::string HardDrive::DataBlock::getRelativePath(bool hideExtension)
+{
+    std::string relativePath;
+    if (hideExtension)
+    {
+        relativePath = "block";
+    }
+    else
+    {
+        relativePath = "block.txt";
+    }
+
+    return relativePath;
+}
+
+void HardDrive::DataBlock::setFlag(std::string flagToSet)
+{
+    std::cout << "Set flag " << flagToSet << std::endl;
+}
+
+void HardDrive::DataBlock::setDefaultApplication(int applicationId)
+{
+    std::cout << "Set default application to the application with ID " << applicationId << std::endl;
+}
+
+
+
 /*
 UDT #8
 */
@@ -551,6 +664,24 @@ RAM::MemoryBlock RAM::accessFromActiveMemory(int address)
     MemoryBlock dummyRetrivalBlock;
     std::cout << "Accessed the memory block at address " << address << std::endl;
     return dummyRetrivalBlock;
+}
+
+
+int RAM::MemoryBlock::getCellStatus(int x, int y)
+{
+    int status = 1;
+    std::cout << "Get the status of the cell at " << x << ", " << y << std::endl;
+    return status;
+}
+
+void RAM::MemoryBlock::setCacheLevel(int cacheLevel)
+{
+    std::cout << "Set cache level to " << cacheLevel << std::endl;
+}
+
+void RAM::MemoryBlock::flagAsCacheMiss(std::string alertMessage)
+{
+    std::cout << "Cache miss with message " << alertMessage << std::endl;
 }
 
 
