@@ -72,19 +72,19 @@ UDT #1
 */
 struct BurgerShack
 {
-    float profitPerWeek = 745.32f;
-    int numBurgersServedPerDay = 576;
-    int numToppingOptions = 12;
-    float beefUsedPerWeek = 47.5f;
-    int daysSinceGreaseTrapCleaned = 2;
+    int numBurgersServedPerDay, numToppingOptions, daysSinceGreaseTrapCleaned;
+    float profitPerWeek, beefUsedPerWeek;
     
+    BurgerShack();
+
     struct Customer
     {
-        std::string name = "Dave";
-        int customerNumber = 27;
-        bool isRegularCustomer = false;
-        float tipPercentage = 0.15f;
-        float dollarsInWallet = 53.24f;
+        std::string name;
+        bool isRegularCustomer;
+        int customerNumber;
+        float tipPercentage, dollarsInWallet;
+
+        Customer();
 
         void payForMeal(float amountOwed, bool tip = true);
         float checkHowMuchSodaLeftInCup(bool removeLid = false);
@@ -97,6 +97,25 @@ struct BurgerShack
 
     Customer nextCustomerInLine;
 };
+
+BurgerShack::BurgerShack()
+{
+    
+    numBurgersServedPerDay = 576;
+    numToppingOptions = 12;
+    daysSinceGreaseTrapCleaned = 2;
+    profitPerWeek = 745.32f;
+    beefUsedPerWeek = 47.5f;
+}
+
+BurgerShack::Customer::Customer()
+{
+    name = "Dave";
+    isRegularCustomer = false;
+    customerNumber = 27;
+    tipPercentage = 0.15f;
+    dollarsInWallet = 53.24f;
+}
 
 void BurgerShack::serveBurger(Customer customer, bool withFries)
 {
@@ -156,16 +175,24 @@ UDT #2
 */
 struct FishingTrawler
 {
-    int numFishingNets = 3;
-    int numCrewMembers = 4;
-    float amountOfFishCaughtPerDay = 323.4f;
-    float amountOfGasRemaining = 25.4f;
-    float distanceTraveledPerWeek = 134.3f;
+    int numFishingNets, numCrewMembers;
+    float amountOfFishCaughtPerDay, amountOfGasRemaining, distanceTraveledPerWeek;
+
+    FishingTrawler();
 
     void pullInNet(int netId);
     void turnToPort(int degrees);
     void cleanBarnaclesFromHull(bool inDrydock);
 };
+
+FishingTrawler::FishingTrawler()
+{
+    numFishingNets = 3;
+    numCrewMembers = 4;
+    amountOfFishCaughtPerDay = 323.4f;
+    amountOfGasRemaining = 25.4f;
+    distanceTraveledPerWeek = 134.3f;
+}
 
 void FishingTrawler::pullInNet(int netId)
 {
@@ -193,19 +220,19 @@ UDT #3
 */
 struct Dog
 {
-    float distanceTraveledPerDay = 3.4f;
-    float amountOfFoodEatenPerDay = 1.3f;
-    float topSpeed = 17.4f;
-    int age = 3;
-    float weight = 43.2f;
+    int age;
+    float distanceTraveledPerDay, amountOfFoodEatenPerDay, topSpeed, weight;
+
+    Dog();
 
     struct Owner
     {
-        std::string name = "Nancy";
-        int age = 42;
-        bool hasDogTreats = true;
-        float topSpeed = 16.4f;
-        bool toughDayAtWork = false;
+        std::string name;
+        bool hasDogTreats, toughDayAtWork;
+        int age;
+        float topSpeed;
+        
+        Owner();
 
         void walkTheDog(float distanceToTravel, float initialSpeed = 5.3f);
         void feedTheDog(float amountOfFood, bool isDryFood = false);
@@ -218,6 +245,25 @@ struct Dog
 
     Owner ownerNancy;
 };
+
+Dog::Dog()
+{
+    age = 3;
+    distanceTraveledPerDay = 3.4f;
+    amountOfFoodEatenPerDay = 1.3f;
+    topSpeed = 17.4f;
+    weight = 43.2f;
+}
+
+Dog::Owner::Owner()
+{
+    name = "Nancy";
+    hasDogTreats = true;
+    toughDayAtWork = false;
+    age = 42;
+    topSpeed = 16.4f;
+}
+
 
 void Dog::rollOver(bool toTheLeft)
 {  
@@ -275,16 +321,25 @@ UDT #4
 */
 struct SteamLocomotive
 {
-    int numCarsOnTrain = 15;
-    float amountOfCoalUsedPerDay = 7.5f;
-    int age = 25;
-    int horsepower = 4532;
-    int numCrewMembers = 2;
+    int numCarsOnTrain, age, horsepower, numCrewMembers;
+    float amountOfCoalUsedPerDay;
+
+    SteamLocomotive();
 
     void detachFromCurrentTrainCar(bool warnCrew);
     void addCoalToFurnace(float lbsCoalToAdd);
     void slamOnTheBrakes(int delayTime);
 };
+
+SteamLocomotive::SteamLocomotive()
+{
+    numCarsOnTrain = 15;
+    age = 25;
+    horsepower = 4532;
+    numCrewMembers = 2;
+    amountOfCoalUsedPerDay = 7.5f;
+}
+
 
 void SteamLocomotive::detachFromCurrentTrainCar(bool warnCrew)
 {
@@ -312,19 +367,18 @@ UDT #5
 */
 struct Screen
 {
-    int brightness = 500;
-    float diagonalScreenSize = 13.3f;
-    int pixelsPerInch = 227;
-    int refreshRate = 60;
-    int colorTemperature = 6500;
+    int brightness, pixelsPerInch, refreshRate, colorTemperature;
+    float diagonalScreenSize;
+
+    Screen();
 
     struct PixelMap
     {
-        int numPixelsX = 2560;
-        int numPixelsY = 1600;
-        float numMegapixels = 4.096f;
-        int colorDepth = 24;
-        std::string aspectRatio = "16:10";
+        int numPixelsX, numPixelsY, colorDepth;
+        float numMegapixels;
+        std::string aspectRatio;
+        
+        PixelMap();
 
         void setPixelToColor(int pixelX, int pixelY, int r, int g, int b);
         void scaleResolution(int desiredResolutionX, int desiredResolutionY);
@@ -335,6 +389,24 @@ struct Screen
     void adjustColorTemperature(int newColorTemperature);
     void drawAndDisplayNewImage(PixelMap pixelMap);
 };
+
+Screen::Screen()
+{
+    brightness = 500;
+    pixelsPerInch = 227;
+    refreshRate = 60;
+    colorTemperature = 6500;
+    diagonalScreenSize = 13.3f;
+}
+
+Screen::PixelMap::PixelMap()
+{
+    numPixelsX = 2560;
+    numPixelsY = 1600;
+    colorDepth = 24;
+    numMegapixels = 4.096f;
+    aspectRatio = "16:10";
+}
 
 void Screen::adjustBrightness(int newBrightness)
 {
@@ -376,16 +448,25 @@ UDT #6
 */
 struct Keyboard
 {
-    int numKeys = 109;
-    int backlightingBrightness = 750;
-    float travelDistance = 0.5f;
-    float latency = 2.4f;
-    float delayUntilKeyRepeat = 5.6f;
+    int numKeys, backlightingBrightness;
+    float travelDistance, latency, delayUntilKeyRepeat;
+
+    Keyboard();
 
     int sendCharacterCodeToDriver(char character);
     void triggerFunctionKeyAction(int functionKeyId);
     void capsLockToggle(bool toStateOn);
 };
+
+Keyboard::Keyboard()
+{
+    numKeys = 109;
+    backlightingBrightness = 750;
+    travelDistance = 0.5f;
+    latency = 2.4f;
+    delayUntilKeyRepeat = 5.6f;
+}
+
 
 int Keyboard::sendCharacterCodeToDriver(char character)
 {
@@ -410,19 +491,18 @@ UDT #7
 */
 struct HardDrive
 {
-    int totalCapacity = 500;
-    float currentlyUsedDiskSpace = 356.43f;
-    int dataTransferRate = 550;
-    float powerConsumption = 2.7f;
-    float latency = 1.2f;
+    int totalCapacity, dataTransferRate;
+    float currentlyUsedDiskSpace, powerConsumption, latency;
+
+    HardDrive();
 
     struct DataBlock
     {
-        double size = 3.2e6;
-        std::string dateCreated = "3/12/2020";
-        std::string dateLastAccessed = "4/06/2020";
-        std::string fileName = "data.txt";
-        bool isLocked = false;
+        std::string dateCreated, dateLastAccessed, fileName;
+        bool isLocked;
+        double size;
+
+        DataBlock();
 
         std::string getRelativePath(bool hideExtension = false);
         void setFlag(std::string flagToSet);
@@ -433,6 +513,25 @@ struct HardDrive
     DataBlock retrieveDataFromDisk(int address);    
     void partitionHardDrive(int sizeOfPartition);
 };
+
+HardDrive::HardDrive()
+{
+    totalCapacity = 500;
+    dataTransferRate = 550;
+    currentlyUsedDiskSpace = 356.43f;
+    powerConsumption = 2.7f;
+    latency = 1.2f;
+}
+
+HardDrive::DataBlock::DataBlock()
+{
+    dateCreated = "3/12/2020";
+    dateLastAccessed = "4/06/2020";
+    fileName = "data.txt";
+    isLocked = false;
+    size = 3.2e6;
+}
+
 
 void HardDrive::storeDataToDisk(DataBlock dataBlock)
 {
@@ -476,19 +575,18 @@ UDT #8
 */
 struct RAM
 {
-    int numSlots = 2;
-    int ramCapacityPerSlot = 8;
-    int clockSpeed = 1600;
-    float transferRate = 12.8f;
-    float powerConsumption = 2.75f;
+    int numSlots, ramCapacityPerSlot, clockSpeed;
+    float transferRate, powerConsumption;
+
+    RAM();
 
     struct MemoryBlock
     {
-        int size = 2.45e4;
-        bool isSRAM = false;
-        bool currentlyBeingAccessed = false;
-        double msSinceLastAccess = 45;
-        bool overheating = false;
+        int size;
+        bool isSRAM, currentlyBeingAccessed, overheating;
+        double msSinceLastAccess;
+
+        MemoryBlock();
 
         int getCellStatus(int x, int y);
         void setCacheLevel(int cacheLevel);
@@ -499,6 +597,25 @@ struct RAM
     void removeFromActiveMemory(MemoryBlock memoryBlock);
     MemoryBlock accessFromActiveMemory(int address);
 };
+
+RAM::RAM()
+{
+    numSlots = 2;
+    ramCapacityPerSlot = 8;
+    clockSpeed = 1600;
+    transferRate = 12.8f;
+    powerConsumption = 2.75f;
+}
+
+RAM::MemoryBlock::MemoryBlock()
+{
+    size = 2.45e4;
+    isSRAM = false;
+    currentlyBeingAccessed = false;
+    overheating = false;
+    msSinceLastAccess = 45;
+}
+
 
 int RAM::loadIntoActiveMemory(int address, int sizeOfMemoryBlock)
 {
@@ -544,16 +661,25 @@ UDT #9
 */
 struct OperatingSystem
 {
-    float osVersion = 12.3f;
-    int processorBits = 64;
-    int numActiveProcesses = 372;
-    int numActiveThreads = 1960;
-    int numInputDevices = 5;
+    int processorBits, numActiveProcesses, numActiveThreads, numInputDevices;
+    float osVersion;
+
+    OperatingSystem();
 
     void swapActiveJob(int newJobIndex);
     void passInputToApplication(int applicationId);
     void updateOperatingSystemVersion(bool waitUntilTonight);
 };
+
+OperatingSystem::OperatingSystem()
+{
+    processorBits = 64;
+    numActiveProcesses = 372;
+    numActiveThreads = 1960;
+    numInputDevices = 5;
+    osVersion = 12.3f;
+}
+
 
 void OperatingSystem::swapActiveJob(int newJobIndex)
 {
@@ -583,16 +709,22 @@ UDT #10
 */
 struct LaptopComputer
 {
-    Screen screen;
-    Keyboard keyboard;
-    HardDrive hardDrive;
-    RAM ram;
-    OperatingSystem operatingSystem;
+    LaptopComputer();
 
     void openApplication(int applicationId);
     std::string searchForWifiNetworks(bool trustedNetworksOnly);
     void configurePreferences(bool flagAsUpdateReady);
 };
+
+LaptopComputer::LaptopComputer()
+{
+    Screen screen;
+    Keyboard keyboard;
+    HardDrive hardDrive;
+    RAM ram;
+    OperatingSystem operatingSystem;
+}
+
 
 void LaptopComputer::openApplication(int applicationId)
 {
