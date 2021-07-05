@@ -135,7 +135,7 @@ float BurgerShack::chargeCustomer(Customer customer, float discountPercentage)
     return amountToCharge;
 }
 
-void cleanGrill(bool extraMessToClean)
+void BurgerShack::cleanGrill(bool extraMessToClean)
 {
     std::cout << "Cleaned the grill..." << std::endl;
 
@@ -620,7 +620,7 @@ RAM::MemoryBlock::MemoryBlock()
 int RAM::loadIntoActiveMemory(int address, int sizeOfMemoryBlock)
 {
     int activeMemoryAddress = 35423;
-    std::cout << "Loaded " << sizeOfMemoryBlock << " bits from address " << address << "into active memory at address " << activeMemoryAddress << std::endl;
+    std::cout << "Loaded " << sizeOfMemoryBlock << " bits from address " << address << " into active memory at address " << activeMemoryAddress << std::endl;
     return activeMemoryAddress;
 }
 
@@ -771,9 +771,17 @@ void LaptopComputer::configurePreferences(bool flagAsUpdateReady)
  Wait for my code review.
  */
 
+void printDivider()
+{
+    std::cout << "-----------------------------------------------\n"; 
+}
+
 #include <iostream>
 int main()
 {
+    /*
+     3: UDT instantiations
+    */
     BurgerShack firstBurgerShack;
     BurgerShack secondBurgerShack;
 
@@ -801,9 +809,42 @@ int main()
     OperatingSystem linuxManjaro;
     OperatingSystem windows10;
 
-    LaptopComputer macbookPro2016;
+    LaptopComputer macbookPro;
     LaptopComputer chromebook;
 
+    /*
+     4: calling member functions
+    */
+    firstBurgerShack.cleanGrill(true);
+    printDivider();
+    
+    trawler1.pullInNet(4);
+    printDivider();
+
+    leon.goToSleep(true);
+    printDivider();
+
+    localService.addCoalToFurnace(32.3f);
+    printDivider();
+
+    laptopDisplay.adjustBrightness(400);
+    printDivider();
+
+    externalKeyboard.triggerFunctionKeyAction(127);
+    printDivider();
+
+    primaryHardDrive.partitionHardDrive(10000);
+    printDivider();
+
+    sixteenGigs.loadIntoActiveMemory(42330, 45000);
+    printDivider();
+
+    linuxManjaro.updateOperatingSystemVersion(true);
+    printDivider();
+
+    macbookPro.openApplication(4);
+    printDivider();
+    
 
     Example::main();
     std::cout << "good to go!" << std::endl;
