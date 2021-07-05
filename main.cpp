@@ -720,11 +720,15 @@ struct LaptopComputer
     void configurePreferences(bool flagAsUpdateReady);
 
     Keyboard testKeyboard;
+    FIXME: add your 5 member variables as you wrote in Project 3.1
 };
 
 LaptopComputer::LaptopComputer()
 {
-    Screen screen;
+    FIXME: these are supposed to be member variables.  
+    FIXME: what you have written here are LOCAL FUNCTION VARIABLES
+    FIXME: they disappear when this constructor ends.
+    Screen screen;  
     Keyboard keyboard;
     HardDrive hardDrive;
     RAM ram;
@@ -870,8 +874,8 @@ int main()
     /*
     QUESTION: why does the first line of code show below (attempting to access member variable 'latency' of member UDT 'keyboard' that was declared in the constructor of my LaptopComputer struct) fail to compile?  When I explicitely declare a UDT of the same type in the body of my LaptopComputer struct ('testKeyboard'), the second line of code works as I would expect.  What is causing this issue?
     */
-    // std::cout << macbookPro.keyboard.latency << "\n";
-    // std::cout << macbookPro.testKeyboard.latency << "\n";
+    std::cout << macbookPro.keyboard.latency << "\n";
+    std::cout << macbookPro.testKeyboard.latency << "\n";
 
     Example::main();
     std::cout << "good to go!" << std::endl;
