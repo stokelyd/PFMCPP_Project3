@@ -388,6 +388,8 @@ struct Screen
     void adjustBrightness(int newBrightness);
     void adjustColorTemperature(int newColorTemperature);
     void drawAndDisplayNewImage(PixelMap pixelMap);
+
+    PixelMap screenImage;
 };
 
 Screen::Screen()
@@ -596,6 +598,8 @@ struct RAM
     int loadIntoActiveMemory(int address, int sizeOfMemoryBlock);
     void removeFromActiveMemory(MemoryBlock memoryBlock);
     MemoryBlock accessFromActiveMemory(int address);
+
+    MemoryBlock exampleMemoryBlock;
 };
 
 RAM::RAM()
@@ -714,6 +718,8 @@ struct LaptopComputer
     void openApplication(int applicationId);
     std::string searchForWifiNetworks(bool trustedNetworksOnly);
     void configurePreferences(bool flagAsUpdateReady);
+
+    Keyboard testKeyboard;
 };
 
 LaptopComputer::LaptopComputer()
@@ -771,9 +777,12 @@ void LaptopComputer::configurePreferences(bool flagAsUpdateReady)
  Wait for my code review.
  */
 
-void printDivider()
+void printDivider(int numToPrint = 1)
 {
-    std::cout << "-----------------------------------------------\n"; 
+    for (int i = 0; i < numToPrint; i++)
+    {
+        std::cout << "-----------------------------------------------\n"; 
+    }
 }
 
 #include <iostream>
@@ -817,34 +826,52 @@ int main()
     */
     firstBurgerShack.cleanGrill(true);
     printDivider();
-    
     trawler1.pullInNet(4);
     printDivider();
-
     leon.goToSleep(true);
     printDivider();
-
     localService.addCoalToFurnace(32.3f);
     printDivider();
-
     laptopDisplay.adjustBrightness(400);
     printDivider();
-
     externalKeyboard.triggerFunctionKeyAction(127);
     printDivider();
-
     primaryHardDrive.partitionHardDrive(10000);
     printDivider();
-
     sixteenGigs.loadIntoActiveMemory(42330, 45000);
     printDivider();
-
     linuxManjaro.updateOperatingSystemVersion(true);
     printDivider();
-
     macbookPro.openApplication(4);
+    printDivider(2);
+
+    /*
+     5: print member variables/return values
+    */
+    std::cout << "The first burger shack serves " << firstBurgerShack.numBurgersServedPerDay << " burgers each day.\n"; 
     printDivider();
-    
+    std::cout << "The second trawler has " << trawler2.amountOfGasRemaining << " gallons of fuel remaining.\n";
+    printDivider();
+    std::cout << "Leon has a top speed of " << leon.topSpeed << " km/hr.\n";
+    printDivider(); 
+    std::cout << "The Local Service is " << localService.age << " years old.\n";
+    printDivider();
+    std::cout << "Working: " << laptopDisplay.screenImage.getRedLevelOfTriad(2300, 124) << " was the value.\n";
+    printDivider();
+    std::cout << "The external keyboard has " << externalKeyboard.numKeys << " keys.\n";
+    printDivider();
+    std::cout << "Working: " << primaryHardDrive.retrieveDataFromDisk(42032).getRelativePath() << " is the filename\n";
+    printDivider();
+    std::cout << "Is the example block of memory currently being accessed? " << (sixteenGigs.exampleMemoryBlock.currentlyBeingAccessed ? "-YES" : "-NO") << "\n";
+    printDivider();
+    std::cout << "Working: " << macbookPro.searchForWifiNetworks(false) << " was the network returned.\n";
+    printDivider(2);
+
+    /*
+    QUESTION: why does the first line of code show below (attempting to access member variable 'latency' of member UDT 'keyboard' that was declared in the constructor of my LaptopComputer struct) fail to compile?  When I explicitely declare a UDT of the same type in the body of my LaptopComputer struct ('testKeyboard'), the second line of code works as I would expect.  What is causing this issue?
+    */
+    // std::cout << macbookPro.keyboard.latency << "\n";
+    // std::cout << macbookPro.testKeyboard.latency << "\n";
 
     Example::main();
     std::cout << "good to go!" << std::endl;
