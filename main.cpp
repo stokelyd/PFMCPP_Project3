@@ -713,26 +713,21 @@ UDT #10
 */
 struct LaptopComputer
 {
-    LaptopComputer();
-
-    void openApplication(int applicationId);
-    std::string searchForWifiNetworks(bool trustedNetworksOnly);
-    void configurePreferences(bool flagAsUpdateReady);
-
-    Keyboard testKeyboard;
-    FIXME: add your 5 member variables as you wrote in Project 3.1
-};
-
-LaptopComputer::LaptopComputer()
-{
-    FIXME: these are supposed to be member variables.  
-    FIXME: what you have written here are LOCAL FUNCTION VARIABLES
-    FIXME: they disappear when this constructor ends.
     Screen screen;  
     Keyboard keyboard;
     HardDrive hardDrive;
     RAM ram;
     OperatingSystem operatingSystem;
+
+    LaptopComputer();
+
+    void openApplication(int applicationId);
+    std::string searchForWifiNetworks(bool trustedNetworksOnly);
+    void configurePreferences(bool flagAsUpdateReady);
+};
+
+LaptopComputer::LaptopComputer()
+{    
 }
 
 
@@ -869,13 +864,9 @@ int main()
     std::cout << "Is the example block of memory currently being accessed? " << (sixteenGigs.exampleMemoryBlock.currentlyBeingAccessed ? "-YES" : "-NO") << "\n";
     printDivider();
     std::cout << "Working: " << macbookPro.searchForWifiNetworks(false) << " was the network returned.\n";
+    printDivider();
+    std::cout << "The latency of the keyboard is " << macbookPro.keyboard.latency << "ms.\n";
     printDivider(2);
-
-    /*
-    QUESTION: why does the first line of code show below (attempting to access member variable 'latency' of member UDT 'keyboard' that was declared in the constructor of my LaptopComputer struct) fail to compile?  When I explicitely declare a UDT of the same type in the body of my LaptopComputer struct ('testKeyboard'), the second line of code works as I would expect.  What is causing this issue?
-    */
-    std::cout << macbookPro.keyboard.latency << "\n";
-    std::cout << macbookPro.testKeyboard.latency << "\n";
 
     Example::main();
     std::cout << "good to go!" << std::endl;
