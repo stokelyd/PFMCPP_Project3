@@ -774,6 +774,37 @@ void LaptopComputer::configurePreferences(bool flagAsUpdateReady)
 #include <iostream>
 int main()
 {
+    BurgerShack firstBurgerShack;
+    BurgerShack secondBurgerShack;
+
+    FishingTrawler trawler1;
+    FishingTrawler trawler2;
+
+    Dog percy;
+    Dog leon;
+
+    SteamLocomotive transCanada;
+    SteamLocomotive localService;
+
+    Screen laptopDisplay;
+    Screen secondMonitor;
+
+    Keyboard laptopKeyboard;
+    Keyboard externalKeyboard;
+
+    HardDrive primaryHardDrive;
+    HardDrive backupDrive1;
+
+    RAM eightGigs;
+    RAM sixteenGigs;
+
+    OperatingSystem linuxManjaro;
+    OperatingSystem windows10;
+
+    LaptopComputer macbookPro2016;
+    LaptopComputer chromebook;
+
+
     Example::main();
     std::cout << "good to go!" << std::endl;
 }
