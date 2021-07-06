@@ -44,18 +44,25 @@ UDT #1
 struct BurgerShack
 {
     int numBurgersServedPerDay, numToppingOptions, daysSinceGreaseTrapCleaned;
-    float profitPerWeek, beefUsedPerWeek;
+    float profitPerWeek { 745.32f }, beefUsedPerWeek { 47.5f };
     
-    BurgerShack();
+    BurgerShack() : numBurgersServedPerDay(576), numToppingOptions(12)
+    {
+        daysSinceGreaseTrapCleaned = 2;
+    }
 
     struct Customer
     {
-        std::string name;
-        bool isRegularCustomer;
+        std::string name = "Dave";
+        bool isRegularCustomer = false;
         int customerNumber;
         float tipPercentage, dollarsInWallet;
 
-        Customer();
+        Customer() : customerNumber(27)
+        {
+            tipPercentage = 0.15f;
+            dollarsInWallet = 53.24f;
+        }
 
         void payForMeal(float amountOwed, bool tip = true);
         float checkHowMuchSodaLeftInCup(bool removeLid = false);
@@ -68,25 +75,6 @@ struct BurgerShack
 
     Customer nextCustomerInLine;
 };
-
-BurgerShack::BurgerShack()
-{
-    
-    numBurgersServedPerDay = 576;
-    numToppingOptions = 12;
-    daysSinceGreaseTrapCleaned = 2;
-    profitPerWeek = 745.32f;
-    beefUsedPerWeek = 47.5f;
-}
-
-BurgerShack::Customer::Customer()
-{
-    name = "Dave";
-    isRegularCustomer = false;
-    customerNumber = 27;
-    tipPercentage = 0.15f;
-    dollarsInWallet = 53.24f;
-}
 
 void BurgerShack::serveBurger(Customer customer, bool withFries)
 {
@@ -112,7 +100,7 @@ void BurgerShack::cleanGrill(bool extraMessToClean)
 
     if(extraMessToClean)
     {
-        std::cout << "...it was really gross." << std::endl;   
+        std::cout << "...it was really gross, probably because the shack uses " << beefUsedPerWeek << "lbs of meat per week." << std::endl;   
     }
 }
 
@@ -156,18 +144,15 @@ struct FishingTrawler
     void cleanBarnaclesFromHull(bool inDrydock);
 };
 
-FishingTrawler::FishingTrawler()
+FishingTrawler::FishingTrawler() : numFishingNets(5), numCrewMembers(4), amountOfFishCaughtPerDay(323.4f)
 {
-    numFishingNets = 3;
-    numCrewMembers = 4;
-    amountOfFishCaughtPerDay = 323.4f;
     amountOfGasRemaining = 25.4f;
     distanceTraveledPerWeek = 134.3f;
 }
 
 void FishingTrawler::pullInNet(int netId)
 {
-    std::cout << "Pulled in net #" << netId << std::endl;
+    std::cout << "Pulled in net #" << netId << " out of " << numFishingNets << " total fishing nets." << std::endl;
 }
 
 void FishingTrawler::turnToPort(int degrees)
@@ -191,16 +176,17 @@ UDT #3
 */
 struct Dog
 {
-    int age;
-    float distanceTraveledPerDay, amountOfFoodEatenPerDay, topSpeed, weight;
+    int age { 3 };
+    float distanceTraveledPerDay, amountOfFoodEatenPerDay;
+    float topSpeed { 17.4f }, weight { 43.2f };
 
     Dog();
 
     struct Owner
     {
-        std::string name;
+        std::string name { "Nancy" };
         bool hasDogTreats, toughDayAtWork;
-        int age;
+        int age { 42 };
         float topSpeed;
         
         Owner();
@@ -217,21 +203,13 @@ struct Dog
     Owner ownerNancy;
 };
 
-Dog::Dog()
+Dog::Dog() : distanceTraveledPerDay(3.4f)
 {
-    age = 3;
-    distanceTraveledPerDay = 3.4f;
     amountOfFoodEatenPerDay = 1.3f;
-    topSpeed = 17.4f;
-    weight = 43.2f;
 }
 
-Dog::Owner::Owner()
+Dog::Owner::Owner() : hasDogTreats(true), toughDayAtWork(false)
 {
-    name = "Nancy";
-    hasDogTreats = true;
-    toughDayAtWork = false;
-    age = 42;
     topSpeed = 16.4f;
 }
 
@@ -254,12 +232,14 @@ void Dog::goToSleep(bool pleasantDreams)
 
     if(pleasantDreams)
     {
-        std::cout << "...and slept peacefully." << std::endl;
+        std::cout << "...and slept peacefully," << std::endl;
     }
     else
     {
-        std::cout << "...but had nightmares." << std::endl;
+        std::cout << "...but had nightmares," << std::endl;
     }
+
+    std::cout << "likely due to eating " << amountOfFoodEatenPerDay << "lbs of food today\n";
 }
 
 
@@ -293,7 +273,7 @@ UDT #4
 struct SteamLocomotive
 {
     int numCarsOnTrain, age, horsepower, numCrewMembers;
-    float amountOfCoalUsedPerDay;
+    float amountOfCoalUsedPerDay { 7.5f };
 
     SteamLocomotive();
 
@@ -302,13 +282,10 @@ struct SteamLocomotive
     void slamOnTheBrakes(int delayTime);
 };
 
-SteamLocomotive::SteamLocomotive()
+SteamLocomotive::SteamLocomotive() : numCarsOnTrain(15), age(25)
 {
-    numCarsOnTrain = 15;
-    age = 25;
     horsepower = 4532;
     numCrewMembers = 2;
-    amountOfCoalUsedPerDay = 7.5f;
 }
 
 
@@ -319,7 +296,7 @@ void SteamLocomotive::detachFromCurrentTrainCar(bool warnCrew)
         std::cout << "Warned the crew and..." << std::endl;
     }
 
-    std::cout << "Detached the locomotive from the currently attached train car." << std::endl;
+    std::cout << "Detached the locomotive from the currently attached train car: " << (numCarsOnTrain - 1) << " cars remaining.\n";
 }
 
 void SteamLocomotive::addCoalToFurnace(float lbsCoalToAdd)
@@ -339,15 +316,17 @@ UDT #5
 struct Screen
 {
     int brightness, pixelsPerInch, refreshRate, colorTemperature;
-    float diagonalScreenSize;
+    float diagonalScreenSize { 13.3f };
 
-    Screen();
+    Screen() : brightness(500), pixelsPerInch(227), refreshRate(60), colorTemperature(6500)
+    {
+    }
 
     struct PixelMap
     {
         int numPixelsX, numPixelsY, colorDepth;
-        float numMegapixels;
-        std::string aspectRatio;
+        float numMegapixels { 4.096f };
+        std::string aspectRatio { "16:10" };
         
         PixelMap();
 
@@ -363,22 +342,10 @@ struct Screen
     PixelMap screenImage;
 };
 
-Screen::Screen()
-{
-    brightness = 500;
-    pixelsPerInch = 227;
-    refreshRate = 60;
-    colorTemperature = 6500;
-    diagonalScreenSize = 13.3f;
-}
 
-Screen::PixelMap::PixelMap()
+Screen::PixelMap::PixelMap() : numPixelsX(2560), numPixelsY(1600)
 {
-    numPixelsX = 2560;
-    numPixelsY = 1600;
     colorDepth = 24;
-    numMegapixels = 4.096f;
-    aspectRatio = "16:10";
 }
 
 void Screen::adjustBrightness(int newBrightness)
@@ -421,8 +388,8 @@ UDT #6
 */
 struct Keyboard
 {
-    int numKeys, backlightingBrightness;
-    float travelDistance, latency, delayUntilKeyRepeat;
+    int numKeys { 109 }, backlightingBrightness { 750 };
+    float travelDistance { 0.5f }, latency { 2.4f }, delayUntilKeyRepeat { 5.6f }; 
 
     Keyboard();
 
@@ -433,18 +400,14 @@ struct Keyboard
 
 Keyboard::Keyboard()
 {
-    numKeys = 109;
-    backlightingBrightness = 750;
-    travelDistance = 0.5f;
-    latency = 2.4f;
-    delayUntilKeyRepeat = 5.6f;
 }
 
 
 int Keyboard::sendCharacterCodeToDriver(char character)
 {
     int asciiCode = int(character);
-    std::cout << "Sent the ASCII code " << asciiCode << " to the driver." << std::endl;
+    std::cout << "Sent the ASCII code " << asciiCode << " to the driver.\n";
+    std::cout << "Note: there was a latency of " << latency << " performing this operation.\n";
     return asciiCode;
 }
 
@@ -464,14 +427,17 @@ UDT #7
 */
 struct HardDrive
 {
-    int totalCapacity, dataTransferRate;
+    int totalCapacity { 500 }, dataTransferRate { 550 };
     float currentlyUsedDiskSpace, powerConsumption, latency;
 
-    HardDrive();
+    HardDrive() : currentlyUsedDiskSpace(356.43f), powerConsumption(2.7f), latency(1.2f)
+    {
+
+    }
 
     struct DataBlock
     {
-        std::string dateCreated, dateLastAccessed, fileName;
+        std::string dateCreated { "3/12/2020" }, dateLastAccessed { "4/06/2020" }, fileName { "data.txt" };
         bool isLocked;
         double size;
 
@@ -487,28 +453,17 @@ struct HardDrive
     void partitionHardDrive(int sizeOfPartition);
 };
 
-HardDrive::HardDrive()
-{
-    totalCapacity = 500;
-    dataTransferRate = 550;
-    currentlyUsedDiskSpace = 356.43f;
-    powerConsumption = 2.7f;
-    latency = 1.2f;
-}
 
-HardDrive::DataBlock::DataBlock()
+HardDrive::DataBlock::DataBlock() : isLocked(false)
 {
-    dateCreated = "3/12/2020";
-    dateLastAccessed = "4/06/2020";
-    fileName = "data.txt";
-    isLocked = false;
     size = 3.2e6;
 }
 
 
 void HardDrive::storeDataToDisk(DataBlock dataBlock)
 {
-    std::cout << "Stored the block of data with filename " << dataBlock.fileName << " to disk." << std::endl;
+    std::cout << "Stored the block of data with filename " << dataBlock.fileName << " to disk.\n";
+    std::cout << (totalCapacity - currentlyUsedDiskSpace) << "GB of disk space remaining.\n";
 }
 
 HardDrive::DataBlock HardDrive::retrieveDataFromDisk(int address)
@@ -548,14 +503,16 @@ UDT #8
 */
 struct RAM
 {
-    int numSlots, ramCapacityPerSlot, clockSpeed;
+    int numSlots { 2 }, ramCapacityPerSlot { 8 }, clockSpeed { 1600 };
     float transferRate, powerConsumption;
 
-    RAM();
+    RAM() : transferRate(12.8f), powerConsumption(2.75f)
+    {
+    }
 
     struct MemoryBlock
     {
-        int size;
+        int size { 245000 };
         bool isSRAM, currentlyBeingAccessed, overheating;
         double msSinceLastAccess;
 
@@ -573,22 +530,11 @@ struct RAM
     MemoryBlock exampleMemoryBlock;
 };
 
-RAM::RAM()
+RAM::MemoryBlock::MemoryBlock() : msSinceLastAccess(45)
 {
-    numSlots = 2;
-    ramCapacityPerSlot = 8;
-    clockSpeed = 1600;
-    transferRate = 12.8f;
-    powerConsumption = 2.75f;
-}
-
-RAM::MemoryBlock::MemoryBlock()
-{
-    size = 2.45e4;
     isSRAM = false;
     currentlyBeingAccessed = false;
     overheating = false;
-    msSinceLastAccess = 45;
 }
 
 
@@ -596,6 +542,7 @@ int RAM::loadIntoActiveMemory(int address, int sizeOfMemoryBlock)
 {
     int activeMemoryAddress = 35423;
     std::cout << "Loaded " << sizeOfMemoryBlock << " bits from address " << address << " into active memory at address " << activeMemoryAddress << std::endl;
+    std::cout << "Transfer rate = " << transferRate << "mb/s.\n" ;
     return activeMemoryAddress;
 }
 
@@ -636,7 +583,7 @@ UDT #9
 */
 struct OperatingSystem
 {
-    int processorBits, numActiveProcesses, numActiveThreads, numInputDevices;
+    int processorBits { 64 }, numActiveProcesses { 372 }, numActiveThreads { 1960 }, numInputDevices { 5 };
     float osVersion;
 
     OperatingSystem();
@@ -646,13 +593,8 @@ struct OperatingSystem
     void updateOperatingSystemVersion(bool waitUntilTonight);
 };
 
-OperatingSystem::OperatingSystem()
+OperatingSystem::OperatingSystem() : osVersion(12.3f)
 {
-    processorBits = 64;
-    numActiveProcesses = 372;
-    numActiveThreads = 1960;
-    numInputDevices = 5;
-    osVersion = 12.3f;
 }
 
 
@@ -669,12 +611,14 @@ void OperatingSystem::updateOperatingSystemVersion(bool waitUntilTonight)
 {
     if (waitUntilTonight)
     {
-        std::cout << "The OS will update later tonight." << std::endl;
+        std::cout << "The OS will update later tonight.\n";
     }
     else
     {
-        std::cout << "The OS will now update." << std::endl;
+        std::cout << "The OS will now update.\n";
     }
+
+    std::cout << "Current OS Version: " << osVersion << "\n" << "Next OS Version: " << (osVersion + 0.01f) << "\n";
 }
 
 
@@ -840,6 +784,5 @@ int main()
     std::cout << "The latency of the keyboard is " << macbookPro.keyboard.latency << "ms.\n";
     printDivider(2);
 
-    
     std::cout << "good to go!" << std::endl;
 }
