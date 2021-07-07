@@ -403,7 +403,7 @@ void SteamLocomotive::removeCarsFromTrain(int numCarsToRemove)
     {
         if (numCarsOnTrain > 0)
         {
-            numCarsOnTrain--;
+            --numCarsOnTrain;
             std::cout << "Removed the last car from the train, leaving a total of " << numCarsOnTrain << " remaining\n";
         }
         else
