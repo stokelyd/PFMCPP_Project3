@@ -103,6 +103,8 @@ struct BurgerShack
     float chargeCustomer(Customer customer, float discountPercentage);
     void cleanGrill(bool extraMessToClean);
 
+    bool isItTimeToCleanTheGreaseTrap(int cleaningThreshold, int numDaysElapsed = 7);
+
     Customer nextCustomerInLine;
 };
 
@@ -157,6 +159,24 @@ void BurgerShack::Customer::getExtraNapkins(int numNapkins)
     std::cout << "Got " << numNapkins << " extra napkins" << std::endl;
 }
 
+bool BurgerShack::isItTimeToCleanTheGreaseTrap(int cleaningThreshold, int numDaysElapsed)
+{
+    int currentGreaseTrapStatus = daysSinceGreaseTrapCleaned;
+
+    while (currentGreaseTrapStatus < cleaningThreshold)
+    {
+        currentGreaseTrapStatus++;
+
+        if (currentGreaseTrapStatus >= cleaningThreshold)
+        {
+            daysSinceGreaseTrapCleaned += numDaysElapsed;
+            return true;
+        }
+    }
+
+    daysSinceGreaseTrapCleaned += numDaysElapsed;
+    return false;    
+}
 
 
 /*
@@ -172,6 +192,8 @@ struct FishingTrawler
     void pullInNet(int netId);
     void turnToPort(int degrees);
     void cleanBarnaclesFromHull(bool inDrydock);
+
+    void setSailForNumDays(int numDaysToSailFor, float amountFuelUsedPerDay = 6.94f);
 };
 
 FishingTrawler::FishingTrawler() : numFishingNets(5), numCrewMembers(4), amountOfFishCaughtPerDay(323.4f)
@@ -200,6 +222,28 @@ void FishingTrawler::cleanBarnaclesFromHull(bool inDrydock)
     }
 }
 
+void FishingTrawler::setSailForNumDays(int numDaysToSailFor, float amountFuelUsedPerDay)
+{
+    float totalNumFishCaught = 0.f;
+
+    for (int i = 1; i <= numDaysToSailFor; i++)
+    {
+        if (amountOfGasRemaining >= amountFuelUsedPerDay)
+        {
+            amountOfGasRemaining -= amountFuelUsedPerDay;
+            totalNumFishCaught += amountOfFishCaughtPerDay;
+
+            std::cout << "Day " << i << ": Caught " << amountOfFishCaughtPerDay << "lbs of fish today, for a total of " << totalNumFishCaught << "lbs.\n";
+        }
+        else
+        {
+            std::cout << "Out of gas...\n";
+            break;
+        }
+    }
+
+    std::cout << "In total, caught " << totalNumFishCaught << "lbs of fish.\n";
+}
 
 /*
 UDT #3
@@ -229,6 +273,8 @@ struct Dog
     void rollOver(bool toTheLeft);
     void greetOwner(Owner owner);
     void goToSleep(bool pleasantDreams);
+
+    void doSomeTricks(int numToPerform);
 
     Owner ownerNancy;
 };
@@ -272,6 +318,16 @@ void Dog::goToSleep(bool pleasantDreams)
     std::cout << "likely due to eating " << amountOfFoodEatenPerDay << "lbs of food today\n";
 }
 
+void Dog::doSomeTricks(int numToPerform)
+{
+    for (int i = 1; i <= numToPerform; i++)
+    {
+        std::cout << "Did a trick (number " << i << "), and was rewarded\n";
+    }
+
+    ownerNancy.hasDogTreats = false;
+}
+
 
 void Dog::Owner::walkTheDog(float distanceToTravel, float initialSpeed)
 {
@@ -310,6 +366,8 @@ struct SteamLocomotive
     void detachFromCurrentTrainCar(bool warnCrew);
     void addCoalToFurnace(float lbsCoalToAdd);
     void slamOnTheBrakes(int delayTime);
+
+    void removeCarsFromTrain(int numCarsToRemove);
 };
 
 SteamLocomotive::SteamLocomotive() : numCarsOnTrain(15), age(25)
@@ -339,6 +397,23 @@ void SteamLocomotive::slamOnTheBrakes(int delayTime)
     std::cout << "After " << delayTime << " seconds, slammed on the brakes" << std::endl;
 }
 
+void SteamLocomotive::removeCarsFromTrain(int numCarsToRemove)
+{
+    for (int i = 0; i < numCarsToRemove; i++)
+    {
+        if (numCarsOnTrain > 0)
+        {
+            numCarsOnTrain--;
+            std::cout << "Removed the last car from the train, leaving a total of " << numCarsOnTrain << " remaining\n";
+        }
+        else
+        {
+            std::cout << "All of the train cars have been removed...\n";
+            break;
+        }
+    }
+}
+
 
 /*
 UDT #5
@@ -359,6 +434,7 @@ struct Screen
         std::string aspectRatio { "16:10" };
         
         PixelMap();
+        PixelMap(int x, int y);
 
         void setPixelToColor(int pixelX, int pixelY, int r, int g, int b);
         void scaleResolution(int desiredResolutionX, int desiredResolutionY);
@@ -369,11 +445,18 @@ struct Screen
     void adjustColorTemperature(int newColorTemperature);
     void drawAndDisplayNewImage(PixelMap pixelMap);
 
+    PixelMap getNewPixelMapToDraw(int numPixelsX, int numPixelsY, std::string color);
+
     PixelMap screenImage;
 };
 
 
 Screen::PixelMap::PixelMap() : numPixelsX(2560), numPixelsY(1600)
+{
+    colorDepth = 24;
+}
+
+Screen::PixelMap::PixelMap(int x, int y) : numPixelsX(x), numPixelsY(y)
 {
     colorDepth = 24;
 }
@@ -391,6 +474,22 @@ void Screen::adjustColorTemperature(int newColorTemperature)
 void Screen::drawAndDisplayNewImage(PixelMap pixelMap)
 {
     std::cout << "Drew and displayed a new image at aspect ratio " << pixelMap.aspectRatio << std::endl;
+}
+
+Screen::PixelMap Screen::getNewPixelMapToDraw(int numPixelsX, int numPixelsY, std::string color)
+{
+    PixelMap pixelMap(3, 5);
+
+    for (int i = 0; i < numPixelsX; i++)
+    {
+        for (int j = 0; j < numPixelsY; j++)
+        {
+            std::cout << i << ", " << j << ": " << color << "    ";
+        }
+        std::cout << std::endl;
+    }
+
+    return pixelMap;
 }
 
 
@@ -418,7 +517,7 @@ UDT #6
 */
 struct Keyboard
 {
-    int numKeys { 109 }, backlightingBrightness { 750 };
+    int numKeys { 109 }, backlightingBrightness { 500 };
     float travelDistance { 0.5f }, latency { 2.4f }, delayUntilKeyRepeat { 5.6f }; 
 
     Keyboard();
@@ -426,6 +525,8 @@ struct Keyboard
     int sendCharacterCodeToDriver(char character);
     void triggerFunctionKeyAction(int functionKeyId);
     void capsLockToggle(bool toStateOn);
+
+    void adjustBacklightingBrightness(int numStepsToAdjust);
 };
 
 Keyboard::Keyboard()
@@ -452,6 +553,29 @@ void Keyboard::capsLockToggle(bool toStateOn)
     std::cout << "Set caps lock state to " << state << std::endl;
 }
 
+void Keyboard::adjustBacklightingBrightness(int numStepsToAdjust)
+{
+    for (int i = 0; i < abs(numStepsToAdjust); i++)
+    {
+        if (numStepsToAdjust > 0)
+        {
+            backlightingBrightness += 100;
+            std::cout << "Increased keyboard brightness by one notch...\n";
+        }
+        else if (numStepsToAdjust < 0)
+        {
+            backlightingBrightness -= 100;
+            std::cout << "Decreased keyboard brightness by one notch...\n";
+        }
+
+        std::cout << "Current brightness is: " << backlightingBrightness << std::endl;
+        if (backlightingBrightness == 1000 || backlightingBrightness == 0)
+        {
+            break;
+        }
+    }
+}
+
 /*
 UDT #7
 */
@@ -462,7 +586,6 @@ struct HardDrive
 
     HardDrive() : currentlyUsedDiskSpace(356.43f), powerConsumption(2.7f), latency(1.2f)
     {
-
     }
 
     struct DataBlock
@@ -481,6 +604,8 @@ struct HardDrive
     void storeDataToDisk(DataBlock dataBlock); 
     DataBlock retrieveDataFromDisk(int address);    
     void partitionHardDrive(int sizeOfPartition);
+
+    void formatHardDrive();
 };
 
 
@@ -506,6 +631,19 @@ HardDrive::DataBlock HardDrive::retrieveDataFromDisk(int address)
 void HardDrive::partitionHardDrive(int sizeOfPartition)
 {
     std::cout << "Created a new partition of size " << sizeOfPartition << "bits." << std::endl;
+}
+
+void HardDrive::formatHardDrive()
+{
+    for (int i = 10; i <= totalCapacity; i += 10)
+    {
+        if (i % 100 == 0)
+        {
+            std::cout << "Cleared " << i  << "gb out of " << totalCapacity << "gb.\n";
+        }
+    }
+
+    currentlyUsedDiskSpace = 0.f;
 }
 
 
@@ -557,6 +695,8 @@ struct RAM
     void removeFromActiveMemory(MemoryBlock memoryBlock);
     MemoryBlock accessFromActiveMemory(int address);
 
+    void overclockRAM(int desiredClockSpeed);
+
     MemoryBlock exampleMemoryBlock;
 };
 
@@ -586,6 +726,23 @@ RAM::MemoryBlock RAM::accessFromActiveMemory(int address)
     MemoryBlock dummyRetrivalBlock;
     std::cout << "Accessed the memory block at address " << address << std::endl;
     return dummyRetrivalBlock;
+}
+
+void RAM::overclockRAM(int desiredClockSpeed)
+{
+    while (!exampleMemoryBlock.overheating)
+    {
+        if (desiredClockSpeed > clockSpeed)
+        {
+            clockSpeed += 100;
+            std::cout << "Set clock speed to " << clockSpeed << std::endl;
+        }
+
+        if (clockSpeed >= 2000) {
+            exampleMemoryBlock.overheating = true;
+            std::cout << "Warning: overheating\n";
+        }
+    }
 }
 
 
@@ -621,6 +778,8 @@ struct OperatingSystem
     void swapActiveJob(int newJobIndex);
     void passInputToApplication(int applicationId);
     void updateOperatingSystemVersion(bool waitUntilTonight);
+
+    void parseActiveProcesses(int mod);
 };
 
 OperatingSystem::OperatingSystem() : osVersion(12.3f)
@@ -651,6 +810,17 @@ void OperatingSystem::updateOperatingSystemVersion(bool waitUntilTonight)
     std::cout << "Current OS Version: " << osVersion << "\n" << "Next OS Version: " << (osVersion + 0.01f) << "\n";
 }
 
+void OperatingSystem::parseActiveProcesses(int mod)
+{
+    for (int i = 0; i < numActiveProcesses; i++)
+    {
+        if (i % mod == 0)
+        {
+            std::cout << i << " % " << mod << " = 0\n";
+        }
+    }
+}
+
 
 
 /*
@@ -669,6 +839,8 @@ struct LaptopComputer
     void openApplication(int applicationId);
     std::string searchForWifiNetworks(bool trustedNetworksOnly);
     void configurePreferences(bool flagAsUpdateReady);
+
+    void closeAllAndShutdown();
 };
 
 LaptopComputer::LaptopComputer()
@@ -707,6 +879,22 @@ void LaptopComputer::configurePreferences(bool flagAsUpdateReady)
     }
 }
 
+void LaptopComputer::closeAllAndShutdown()
+{
+    std::cout << "Stopping all processes...\n";
+    int processesToClose = operatingSystem.numActiveProcesses;
+
+    for (int i = 1; i <= processesToClose; i++)
+    {
+        operatingSystem.numActiveProcesses--;
+        if (i % 50 == 0 || i == processesToClose)
+        {
+            std::cout << "Stopped " << i << " of " << processesToClose << "...\n";
+        }
+    }
+    std::cout << "All processes stopped, shutting down.\n";
+}
+
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
@@ -733,8 +921,9 @@ void printDivider(int numToPrint = 1)
 int main()
 {
     Example::main();
+    
     /*
-     3: UDT instantiations
+     Part3-3: UDT instantiations
     */
     BurgerShack firstBurgerShack;
     BurgerShack secondBurgerShack;
@@ -767,8 +956,9 @@ int main()
     LaptopComputer chromebook;
 
     /*
-     4: calling member functions
+     Part 3-4: calling member functions
     */
+    std::cout << "PART 3-4\n";
     firstBurgerShack.cleanGrill(true);
     printDivider();
     trawler1.pullInNet(4);
@@ -791,8 +981,9 @@ int main()
     printDivider(2);
 
     /*
-     5: print member variables/return values
+     Part 3-5: print member variables/return values
     */
+    std::cout << "PART 3-5\n";
     std::cout << "The first burger shack serves " << firstBurgerShack.numBurgersServedPerDay << " burgers each day.\n"; 
     printDivider();
     std::cout << "The second trawler has " << trawler2.amountOfGasRemaining << " gallons of fuel remaining.\n";
@@ -813,6 +1004,39 @@ int main()
     printDivider();
     std::cout << "The latency of the keyboard is " << macbookPro.keyboard.latency << "ms.\n";
     printDivider(2);
+    
+    std::cout << "PART 5-4\n";
+
+    /*
+     PART 5-3&4: calls to looping member functions
+    */
+    std::cout << "Is it time to clean the grease trap?\n" << (firstBurgerShack.isItTimeToCleanTheGreaseTrap(6, 5) ? "YES" : "NO") << ": it has been " << firstBurgerShack.daysSinceGreaseTrapCleaned << " days.\n";
+    printDivider();
+    trawler2.setSailForNumDays(5);
+    std::cout << "Fuel remaining: " << trawler2.amountOfGasRemaining << " gallons.\n";
+    printDivider();
+    percy.doSomeTricks(3);
+    std::cout << "The dog's owner " << (percy.ownerNancy.hasDogTreats ? "HAS a few" : "DOES NOT have any") << " more dog treats.\n";
+    printDivider();
+    localService.removeCarsFromTrain(5);
+    std::cout << "There are " << localService.numCarsOnTrain << " cars on this train.\n";
+    printDivider();
+    auto returnedPixelMap = laptopDisplay.getNewPixelMapToDraw(3, 5, "Green");
+    std::cout << "X: " << returnedPixelMap.numPixelsX << "px     Y: " << returnedPixelMap.numPixelsY << "px\n";
+    printDivider();
+    laptopKeyboard.adjustBacklightingBrightness(-6);
+    printDivider();
+    backupDrive1.formatHardDrive();
+    std::cout << "Currently used disk space: " << backupDrive1.currentlyUsedDiskSpace << "gb.\n";
+    printDivider();
+    sixteenGigs.overclockRAM(2500);
+    std::cout << (sixteenGigs.exampleMemoryBlock.overheating ? "Needs to cool down..." : "Good to go") << std::endl;
+    printDivider();
+    windows10.parseActiveProcesses(150);
+    printDivider();
+    macbookPro.closeAllAndShutdown();
+    std::cout << macbookPro.operatingSystem.numActiveProcesses << " active processes.\n";
+    printDivider();
 
     std::cout << "good to go!" << std::endl;
 }
