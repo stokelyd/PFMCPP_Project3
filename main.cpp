@@ -226,7 +226,7 @@ void FishingTrawler::setSailForNumDays(int numDaysToSailFor, float amountFuelUse
 {
     float totalNumFishCaught = 0.f;
 
-    for (int i = 1; i <= numDaysToSailFor; i++)
+    for (int i = 1; i <= numDaysToSailFor; ++i)
     {
         if (amountOfGasRemaining >= amountFuelUsedPerDay)
         {
@@ -320,7 +320,7 @@ void Dog::goToSleep(bool pleasantDreams)
 
 void Dog::doSomeTricks(int numToPerform)
 {
-    for (int i = 1; i <= numToPerform; i++)
+    for (int i = 1; i <= numToPerform; ++i)
     {
         std::cout << "Did a trick (number " << i << "), and was rewarded\n";
     }
@@ -399,7 +399,7 @@ void SteamLocomotive::slamOnTheBrakes(int delayTime)
 
 void SteamLocomotive::removeCarsFromTrain(int numCarsToRemove)
 {
-    for (int i = 0; i < numCarsToRemove; i++)
+    for (int i = 0; i < numCarsToRemove; ++i)
     {
         if (numCarsOnTrain > 0)
         {
@@ -480,9 +480,9 @@ Screen::PixelMap Screen::getNewPixelMapToDraw(int numPixelsX, int numPixelsY, st
 {
     PixelMap pixelMap(3, 5);
 
-    for (int i = 0; i < numPixelsX; i++)
+    for (int i = 0; i < numPixelsX; ++i)
     {
-        for (int j = 0; j < numPixelsY; j++)
+        for (int j = 0; j < numPixelsY; ++j)
         {
             std::cout << i << ", " << j << ": " << color << "    ";
         }
@@ -555,7 +555,7 @@ void Keyboard::capsLockToggle(bool toStateOn)
 
 void Keyboard::adjustBacklightingBrightness(int numStepsToAdjust)
 {
-    for (int i = 0; i < abs(numStepsToAdjust); i++)
+    for (int i = 0; i < abs(numStepsToAdjust); ++i)
     {
         if (numStepsToAdjust > 0)
         {
@@ -738,7 +738,8 @@ void RAM::overclockRAM(int desiredClockSpeed)
             std::cout << "Set clock speed to " << clockSpeed << std::endl;
         }
 
-        if (clockSpeed >= 2000) {
+        if (clockSpeed >= 2000) 
+        {
             exampleMemoryBlock.overheating = true;
             std::cout << "Warning: overheating\n";
         }
@@ -812,7 +813,7 @@ void OperatingSystem::updateOperatingSystemVersion(bool waitUntilTonight)
 
 void OperatingSystem::parseActiveProcesses(int mod)
 {
-    for (int i = 0; i < numActiveProcesses; i++)
+    for (int i = 0; i < numActiveProcesses; ++i)
     {
         if (i % mod == 0)
         {
@@ -884,7 +885,7 @@ void LaptopComputer::closeAllAndShutdown()
     std::cout << "Stopping all processes...\n";
     int processesToClose = operatingSystem.numActiveProcesses;
 
-    for (int i = 1; i <= processesToClose; i++)
+    for (int i = 1; i <= processesToClose; ++i)
     {
         operatingSystem.numActiveProcesses--;
         if (i % 50 == 0 || i == processesToClose)
@@ -911,7 +912,7 @@ void LaptopComputer::closeAllAndShutdown()
 
 void printDivider(int numToPrint = 1)
 {
-    for (int i = 0; i < numToPrint; i++)
+    for (int i = 0; i < numToPrint; ++i)
     {
         std::cout << "-----------------------------------------------\n"; 
     }
